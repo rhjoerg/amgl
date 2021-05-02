@@ -1,6 +1,7 @@
 2021-05-02
-- eclipse download
-- JDK 15 download
+* Eclipse download
+* JDK 15 download
+* Eclipse: disable spell checker
 
 2021-05-01
-- JDK 11 download
+* JDK 11 download
