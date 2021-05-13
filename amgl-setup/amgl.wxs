@@ -1,13 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
   
-	<Product Id="*" Name="AMGL" Language="1033" Version="1.0.0.0" Manufacturer="rhjoerg"
-           UpgradeCode="74882e05-8c3e-4a0a-99c2-80fde5528bf1">
+	<Product
+    Id="2448BC72-B2D2-41EA-8E82-74677519E40F"
+    Name="AMGL"
+    Language="1033"
+    Version="0.0.0.1"
+    Manufacturer="rhjoerg@gmail.com"
+    UpgradeCode="74882E05-8C3E-4A0A-99C2-80FDE5528BF1">
 
-		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+		<Package
+      InstallerVersion="301"
+      Compressed="yes"
+      InstallScope="perMachine"
+			Manufacturer="rhjoerg@gmail.com"
+      Description="Installs AMGL"/>
 
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
-		<MediaTemplate />
+    
+		<MediaTemplate EmbedCab="yes"/>
 
 		<Feature Id="ProductFeature" Title="AMGL" Level="1">
 			<ComponentGroupRef Id="ProductComponents" />
