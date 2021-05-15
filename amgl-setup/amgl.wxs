@@ -37,7 +37,7 @@
 	<Fragment>
 		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
 			<Component Id="ProductComponent" Guid="088A1D6F-79DE-492E-B4CA-BD913B62089C">
-        <File Id="File_AmglExe" Source="../amgl-dist/amgl.exe" KeyPath="yes" />
+        <File Id="File_AmglExe" Source="../amgl-launcher/bin/Debug/amgl-launcher.exe" KeyPath="yes" />
 			</Component>
 		</ComponentGroup>
 	</Fragment>
