@@ -1,4 +1,2 @@
 # amgl
-not yet revealed
-
-## [Developer Diary](diary.md)
+not yet revealed.
