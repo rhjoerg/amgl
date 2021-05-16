@@ -14,7 +14,25 @@
     		dest="download.eclipse.org/releases/2021-03" usetimestamp="true" />
     	<unjar src="download.eclipse.org/releases/2021-03/compositeArtifacts.jar"
     		dest="download.eclipse.org/releases/2021-03" />
+    	
+    	<mkdir dir="download.eclipse.org/technology/epp/packages/2021-03" />
+    	
+    	<get src="http://download.eclipse.org/technology/epp/packages/2021-03/compositeArtifacts.xml"
+    	    dest="download.eclipse.org/technology/epp/packages/2021-03" usetimestamp="true" />
+    	<get src="http://download.eclipse.org/technology/epp/packages/2021-03/compositeContent.xml"
+    	    dest="download.eclipse.org/technology/epp/packages/2021-03" usetimestamp="true" />
+    	
+    	<mkdir dir="download.eclipse.org/technology/epp/packages/2021-03/202103121200" />
         
+    	<get src="http://download.eclipse.org/technology/epp/packages/2021-03/202103121200/artifacts.jar"
+    	    dest="download.eclipse.org/technology/epp/packages/2021-03/202103121200" usetimestamp="true" />
+    	<unjar src="download.eclipse.org/technology/epp/packages/2021-03/202103121200/artifacts.jar"
+    	    dest="download.eclipse.org/technology/epp/packages/2021-03/202103121200" />
+    	<get src="http://download.eclipse.org/technology/epp/packages/2021-03/202103121200/content.jar"
+    	    dest="download.eclipse.org/technology/epp/packages/2021-03/202103121200" usetimestamp="true" />
+    	<unjar src="download.eclipse.org/technology/epp/packages/2021-03/202103121200/content.jar"
+    	    dest="download.eclipse.org/technology/epp/packages/2021-03/202103121200" />
+
     </target>
 
 </project>

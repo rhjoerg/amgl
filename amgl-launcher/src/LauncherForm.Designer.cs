@@ -1,6 +1,6 @@
 ﻿namespace amgl_launcher
 {
-    partial class FormLauncher
+    partial class LauncherForm
     {
         /// <summary>
         /// Erforderliche Designervariable.
@@ -28,14 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.directoryLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // FormLauncher
+            // directoryLabel
+            // 
+            this.directoryLabel.Location = new System.Drawing.Point(13, 13);
+            this.directoryLabel.Name = "directoryLabel";
+            this.directoryLabel.Size = new System.Drawing.Size(400, 13);
+            this.directoryLabel.TabIndex = 0;
+            // 
+            // LauncherForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Name = "FormLauncher";
+            this.Controls.Add(this.directoryLabel);
+            this.Name = "LauncherForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AMGL Launcher";
             this.ResumeLayout(false);
@@ -43,6 +52,8 @@
         }
 
         #endregion
+
+        private System.Windows.Forms.Label directoryLabel;
     }
 }
 

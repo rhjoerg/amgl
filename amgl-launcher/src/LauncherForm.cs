@@ -10,11 +10,17 @@ using System.Windows.Forms;
 
 namespace amgl_launcher
 {
-    public partial class FormLauncher : Form
+    public partial class LauncherForm : Form
     {
-        public FormLauncher()
+        private readonly Context context;
+
+        public LauncherForm(Context context)
         {
+            this.context = context;
+
             InitializeComponent();
+
+            this.directoryLabel.Text = "Directory: " + this.context.Directory;
         }
     }
 }
