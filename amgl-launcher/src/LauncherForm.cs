@@ -13,22 +13,36 @@ namespace amgl_launcher
 {
     public partial class LauncherForm : Form
     {
-        private readonly Context context;
+        private readonly Status status;
 
-        public LauncherForm(Context context)
+        public LauncherForm(Status status)
         {
-            this.context = context;
+            this.status = status;
+            this.status.Changed += new Status.ChangedHandler(this.status_Changed);
 
             InitializeComponent();
 
-            this.directoryLabel.Text = "Directory: " + this.context.Directory;
+            directoryText.Text = status.Directory;
+
+            status_Changed();
+            status.Update();
         }
 
-        private void instalButton_Click(object sender, EventArgs e)
+        private void status_Changed()
         {
-            instalButton.Enabled = false;
-            Thread.Sleep(2000);
-            instalButton.Enabled = true;
+            installButton.Enabled = status.InstallRequired;
+            updateButton.Enabled = status.UpdateAvailable;
+            playButton.Enabled = status.Playable;
+        }
+
+        private void installButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void exitButton_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

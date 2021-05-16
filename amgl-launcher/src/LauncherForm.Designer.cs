@@ -29,45 +29,124 @@
         private void InitializeComponent()
         {
             this.directoryLabel = new System.Windows.Forms.Label();
-            this.instalButton = new System.Windows.Forms.Button();
+            this.installButton = new System.Windows.Forms.Button();
+            this.directoryText = new System.Windows.Forms.TextBox();
+            this.updateButton = new System.Windows.Forms.Button();
+            this.playButton = new System.Windows.Forms.Button();
+            this.exitButton = new System.Windows.Forms.Button();
+            this.statusLabel = new System.Windows.Forms.Label();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
             // directoryLabel
             // 
-            this.directoryLabel.Location = new System.Drawing.Point(13, 13);
+            this.directoryLabel.Location = new System.Drawing.Point(10, 10);
             this.directoryLabel.Name = "directoryLabel";
-            this.directoryLabel.Size = new System.Drawing.Size(400, 13);
-            this.directoryLabel.TabIndex = 0;
+            this.directoryLabel.Size = new System.Drawing.Size(70, 13);
+            this.directoryLabel.TabIndex = 4;
+            this.directoryLabel.Text = "Directory:";
             // 
-            // instalButton
+            // installButton
             // 
-            this.instalButton.Location = new System.Drawing.Point(13, 42);
-            this.instalButton.Name = "instalButton";
-            this.instalButton.Size = new System.Drawing.Size(75, 23);
-            this.instalButton.TabIndex = 1;
-            this.instalButton.Text = "Install";
-            this.instalButton.UseVisualStyleBackColor = true;
-            this.instalButton.Click += new System.EventHandler(this.instalButton_Click);
+            this.installButton.Location = new System.Drawing.Point(10, 40);
+            this.installButton.Name = "installButton";
+            this.installButton.Size = new System.Drawing.Size(135, 23);
+            this.installButton.TabIndex = 0;
+            this.installButton.Text = "Install";
+            this.installButton.UseVisualStyleBackColor = true;
+            this.installButton.Click += new System.EventHandler(this.installButton_Click);
+            // 
+            // directoryText
+            // 
+            this.directoryText.Enabled = false;
+            this.directoryText.Location = new System.Drawing.Point(90, 7);
+            this.directoryText.Name = "directoryText";
+            this.directoryText.ReadOnly = true;
+            this.directoryText.Size = new System.Drawing.Size(200, 20);
+            this.directoryText.TabIndex = 5;
+            // 
+            // updateButton
+            // 
+            this.updateButton.Location = new System.Drawing.Point(10, 70);
+            this.updateButton.Name = "updateButton";
+            this.updateButton.Size = new System.Drawing.Size(135, 23);
+            this.updateButton.TabIndex = 1;
+            this.updateButton.Text = "Update";
+            this.updateButton.UseVisualStyleBackColor = true;
+            // 
+            // playButton
+            // 
+            this.playButton.Location = new System.Drawing.Point(155, 40);
+            this.playButton.Name = "playButton";
+            this.playButton.Size = new System.Drawing.Size(135, 23);
+            this.playButton.TabIndex = 2;
+            this.playButton.Text = "Play";
+            this.playButton.UseVisualStyleBackColor = true;
+            // 
+            // exitButton
+            // 
+            this.exitButton.Location = new System.Drawing.Point(155, 70);
+            this.exitButton.Name = "exitButton";
+            this.exitButton.Size = new System.Drawing.Size(135, 23);
+            this.exitButton.TabIndex = 3;
+            this.exitButton.Text = "Exit";
+            this.exitButton.UseVisualStyleBackColor = true;
+            this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
+            // 
+            // statusLabel
+            // 
+            this.statusLabel.Location = new System.Drawing.Point(10, 100);
+            this.statusLabel.Name = "statusLabel";
+            this.statusLabel.Size = new System.Drawing.Size(280, 13);
+            this.statusLabel.TabIndex = 6;
+            this.statusLabel.Text = "Ready";
+            // 
+            // progressBar
+            // 
+            this.progressBar.Location = new System.Drawing.Point(10, 120);
+            this.progressBar.Maximum = 1000;
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(280, 10);
+            this.progressBar.Step = 50;
+            this.progressBar.TabIndex = 7;
+            this.progressBar.Visible = false;
             // 
             // LauncherForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(434, 81);
-            this.Controls.Add(this.instalButton);
+            this.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.ClientSize = new System.Drawing.Size(300, 140);
+            this.ControlBox = false;
+            this.Controls.Add(this.progressBar);
+            this.Controls.Add(this.statusLabel);
+            this.Controls.Add(this.exitButton);
+            this.Controls.Add(this.playButton);
+            this.Controls.Add(this.updateButton);
+            this.Controls.Add(this.directoryText);
+            this.Controls.Add(this.installButton);
             this.Controls.Add(this.directoryLabel);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "LauncherForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AMGL Launcher";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.Label directoryLabel;
-        private System.Windows.Forms.Button instalButton;
+        private System.Windows.Forms.Button installButton;
+        private System.Windows.Forms.TextBox directoryText;
+        private System.Windows.Forms.Button updateButton;
+        private System.Windows.Forms.Button playButton;
+        private System.Windows.Forms.Button exitButton;
+        private System.Windows.Forms.Label statusLabel;
+        private System.Windows.Forms.ProgressBar progressBar;
     }
 }
 
