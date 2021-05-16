@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.directoryLabel = new System.Windows.Forms.Label();
+            this.instalButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // directoryLabel
@@ -38,12 +39,24 @@
             this.directoryLabel.Size = new System.Drawing.Size(400, 13);
             this.directoryLabel.TabIndex = 0;
             // 
+            // instalButton
+            // 
+            this.instalButton.Location = new System.Drawing.Point(13, 42);
+            this.instalButton.Name = "instalButton";
+            this.instalButton.Size = new System.Drawing.Size(75, 23);
+            this.instalButton.TabIndex = 1;
+            this.instalButton.Text = "Install";
+            this.instalButton.UseVisualStyleBackColor = true;
+            this.instalButton.Click += new System.EventHandler(this.instalButton_Click);
+            // 
             // LauncherForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(434, 81);
+            this.Controls.Add(this.instalButton);
             this.Controls.Add(this.directoryLabel);
+            this.MaximizeBox = false;
             this.Name = "LauncherForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AMGL Launcher";
@@ -54,6 +67,7 @@
         #endregion
 
         private System.Windows.Forms.Label directoryLabel;
+        private System.Windows.Forms.Button instalButton;
     }
 }
 
