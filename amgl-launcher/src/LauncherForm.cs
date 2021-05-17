@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,26 +14,25 @@ namespace amgl_launcher
 {
     public partial class LauncherForm : Form
     {
-        private readonly Status status;
-
-        public LauncherForm(Status status)
+        public LauncherForm()
         {
-            this.status = status;
-            this.status.Changed += new Status.ChangedHandler(this.status_Changed);
+            Status.Changed += new Status.ChangedHandler(this.Status_Changed);
 
             InitializeComponent();
-
-            directoryText.Text = status.Directory;
-
-            status_Changed();
-            status.Update();
+            Status_Changed();
+            timer.Enabled = true;
+        }
+        private async void timer_Tick(object sender, EventArgs e)
+        {
+            timer.Enabled = false;
+            await Status.Update();
         }
 
-        private void status_Changed()
+        private void Status_Changed()
         {
-            installButton.Enabled = status.InstallRequired;
-            updateButton.Enabled = status.UpdateAvailable;
-            playButton.Enabled = status.Playable;
+            installButton.Enabled = Status.InstallRequired;
+            updateButton.Enabled = Status.UpdateAvailable;
+            playButton.Enabled = Status.Playable;
         }
 
         private void installButton_Click(object sender, EventArgs e)

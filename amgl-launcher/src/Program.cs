@@ -15,12 +15,10 @@ namespace amgl_launcher
         [STAThread]
         static void Main()
         {
-            Status status = new Status();
-
             Console.WriteLine(AppDomain.CurrentDomain.BaseDirectory);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LauncherForm(status));
+            Application.Run(new LauncherForm());
         }
     }
 }

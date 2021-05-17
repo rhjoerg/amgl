@@ -10,44 +10,46 @@ namespace amgl_launcher
     {
         public delegate void ChangedHandler();
 
-        public event ChangedHandler Changed;
+        public static event ChangedHandler Changed;
 
-        private bool valid = false;
-        private bool installRequired = false;
-        private bool updateAvailable = false;
+        private static bool installRequired = false;
+        private static bool updateAvailable = false;
+        private static bool valid = false;
 
-        public readonly string Directory = AppDomain.CurrentDomain.BaseDirectory;
-
-        public bool InstallRequired
+        public static bool InstallRequired
         {
             get { return valid && installRequired; }
-
-            set
-            {
-                installRequired = value; Changed.Invoke();
-                
-                if (installRequired)
-                {
-                    updateAvailable = false;
-                }
-
-                Changed.Invoke();
-            }
         }
 
-        public bool UpdateAvailable
+        public static bool UpdateAvailable
         {
             get { return valid && updateAvailable; }
-            set { updateAvailable = value; Changed.Invoke(); }
         }
 
-        public bool Playable
+        public static bool Playable
         {
             get { return valid && !installRequired; } // TODO and not installing/updating
         }
 
-        public void Update()
+        public static async Task Update()
         {
+            bool installRequired = true;
+            bool updateAvailable = false;
+
+            await Task.Run(() =>
+            {
+                installRequired = Installer.Check();
+
+                if (!installRequired)
+                {
+                    // TODO Updater.Check
+                }
+            });
+
+            Status.installRequired = installRequired;
+            Status.updateAvailable = updateAvailable;
+            Status.valid = true;
+            Changed.Invoke();
         }
     }
 }

@@ -61,6 +61,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\Data.cs" />
+    <Compile Include="src\Installer.cs" />
     <Compile Include="src\LauncherForm.cs">
       <SubType>Form</SubType>
     </Compile>

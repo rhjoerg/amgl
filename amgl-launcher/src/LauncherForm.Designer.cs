@@ -28,27 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.directoryLabel = new System.Windows.Forms.Label();
+            this.components = new System.ComponentModel.Container();
             this.installButton = new System.Windows.Forms.Button();
-            this.directoryText = new System.Windows.Forms.TextBox();
             this.updateButton = new System.Windows.Forms.Button();
             this.playButton = new System.Windows.Forms.Button();
             this.exitButton = new System.Windows.Forms.Button();
             this.statusLabel = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
-            // 
-            // directoryLabel
-            // 
-            this.directoryLabel.Location = new System.Drawing.Point(10, 10);
-            this.directoryLabel.Name = "directoryLabel";
-            this.directoryLabel.Size = new System.Drawing.Size(70, 13);
-            this.directoryLabel.TabIndex = 4;
-            this.directoryLabel.Text = "Directory:";
             // 
             // installButton
             // 
-            this.installButton.Location = new System.Drawing.Point(10, 40);
+            this.installButton.Location = new System.Drawing.Point(10, 10);
             this.installButton.Name = "installButton";
             this.installButton.Size = new System.Drawing.Size(135, 23);
             this.installButton.TabIndex = 0;
@@ -56,18 +48,9 @@
             this.installButton.UseVisualStyleBackColor = true;
             this.installButton.Click += new System.EventHandler(this.installButton_Click);
             // 
-            // directoryText
-            // 
-            this.directoryText.Enabled = false;
-            this.directoryText.Location = new System.Drawing.Point(90, 7);
-            this.directoryText.Name = "directoryText";
-            this.directoryText.ReadOnly = true;
-            this.directoryText.Size = new System.Drawing.Size(200, 20);
-            this.directoryText.TabIndex = 5;
-            // 
             // updateButton
             // 
-            this.updateButton.Location = new System.Drawing.Point(10, 70);
+            this.updateButton.Location = new System.Drawing.Point(10, 40);
             this.updateButton.Name = "updateButton";
             this.updateButton.Size = new System.Drawing.Size(135, 23);
             this.updateButton.TabIndex = 1;
@@ -76,7 +59,7 @@
             // 
             // playButton
             // 
-            this.playButton.Location = new System.Drawing.Point(155, 40);
+            this.playButton.Location = new System.Drawing.Point(155, 10);
             this.playButton.Name = "playButton";
             this.playButton.Size = new System.Drawing.Size(135, 23);
             this.playButton.TabIndex = 2;
@@ -85,7 +68,7 @@
             // 
             // exitButton
             // 
-            this.exitButton.Location = new System.Drawing.Point(155, 70);
+            this.exitButton.Location = new System.Drawing.Point(155, 40);
             this.exitButton.Name = "exitButton";
             this.exitButton.Size = new System.Drawing.Size(135, 23);
             this.exitButton.TabIndex = 3;
@@ -95,7 +78,7 @@
             // 
             // statusLabel
             // 
-            this.statusLabel.Location = new System.Drawing.Point(10, 100);
+            this.statusLabel.Location = new System.Drawing.Point(10, 70);
             this.statusLabel.Name = "statusLabel";
             this.statusLabel.Size = new System.Drawing.Size(280, 13);
             this.statusLabel.TabIndex = 6;
@@ -103,7 +86,7 @@
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(10, 120);
+            this.progressBar.Location = new System.Drawing.Point(10, 90);
             this.progressBar.Maximum = 1000;
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(280, 10);
@@ -111,42 +94,42 @@
             this.progressBar.TabIndex = 7;
             this.progressBar.Visible = false;
             // 
+            // timer
+            // 
+            this.timer.Interval = 500;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            // 
             // LauncherForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ClientSize = new System.Drawing.Size(300, 140);
+            this.BackColor = System.Drawing.SystemColors.Window;
+            this.ClientSize = new System.Drawing.Size(300, 110);
             this.ControlBox = false;
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.statusLabel);
             this.Controls.Add(this.exitButton);
             this.Controls.Add(this.playButton);
             this.Controls.Add(this.updateButton);
-            this.Controls.Add(this.directoryText);
             this.Controls.Add(this.installButton);
-            this.Controls.Add(this.directoryLabel);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "LauncherForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AMGL Launcher";
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label directoryLabel;
         private System.Windows.Forms.Button installButton;
-        private System.Windows.Forms.TextBox directoryText;
         private System.Windows.Forms.Button updateButton;
         private System.Windows.Forms.Button playButton;
         private System.Windows.Forms.Button exitButton;
         private System.Windows.Forms.Label statusLabel;
         private System.Windows.Forms.ProgressBar progressBar;
+        private System.Windows.Forms.Timer timer;
     }
 }
 
