@@ -1,9 +1,7 @@
 
-#include <SDKDDKVer.h>
+#include "frame.h"
 
-#define WIN32_LEAN_AND_MEAN
-
-#include <windows.h>
+using namespace amgl;
 
 int APIENTRY wWinMain(
 	_In_ HINSTANCE hInstance,
@@ -11,5 +9,9 @@ int APIENTRY wWinMain(
 	_In_ LPWSTR lpCmdLine,
 	_In_ int nCmdShow)
 {
+	Frame frame(hInstance);
+
+	frame.Run();
+
 	return 0;
 }
