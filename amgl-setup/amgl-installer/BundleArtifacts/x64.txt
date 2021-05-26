@@ -1,0 +1,1 @@
+MainPackage=C:\amgldev\git\amgl\amgl-setup\amgl-installer\bin\x64\Release\amgl-installer_0.0.0.0_x64.msix
