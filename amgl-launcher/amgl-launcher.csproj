@@ -24,6 +24,8 @@
   <PropertyGroup>
     <StartupObject>amgl.Program</StartupObject>
     <ProjectGuid>{893A61BA-4697-44D5-806B-4F28CC512208}</ProjectGuid>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>false</SignManifests>
@@ -43,6 +45,12 @@
   <PropertyGroup>
     <RootNamespace>amgl</RootNamespace>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="Properties\app.manifest" />
@@ -55,12 +63,16 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="actions\Initializer.cs" />
+    <Compile Include="main\MainController.cs" />
     <Compile Include="main\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="main\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="main\MainPresenter.cs" />
+    <Compile Include="model\Status.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
