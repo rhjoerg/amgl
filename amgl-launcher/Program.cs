@@ -1,9 +1,12 @@
 ﻿using amgl.actions;
 using amgl.main;
+using amgl.model;
 using System;
 using System.Diagnostics;
+using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace amgl
 {
@@ -14,6 +17,14 @@ namespace amgl
         {
             if (SelfUpdate())
                 return;
+
+            XmlSerializer serializer = new XmlSerializer(typeof(ContentModel));
+            string filename = Path.Combine(Status.Directory, "amgl.content.xml");
+
+            using (Stream reader = new FileStream(filename, FileMode.Open))
+            {
+                ContentModel content = (ContentModel) serializer.Deserialize(reader);
+            }
 
             string fileVersion = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion;
             Console.WriteLine(fileVersion);

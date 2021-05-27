@@ -13,7 +13,6 @@ namespace amgl.actions
         {
             try
             {
-                bool updaterExists = File.Exists(Status.UpdaterPath);
             }
             catch (Exception)
             {
