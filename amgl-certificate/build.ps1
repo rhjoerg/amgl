@@ -10,7 +10,7 @@ Get-ChildItem Cert:\CurrentUser\My | Where-Object { $_.Subject -match 'AMGL' } |
 $pass = ConvertTo-SecureString -String "amgl" -Force –AsPlainText
 $date = (Get-Date).AddYears(10)
 
-$cert = New-SelfSignedCertificate -Subject "AMGL" -Type CodeSigning -CertStoreLocation "cert:\CurrentUser\My" -NotAfter $date
+$cert = New-SelfSignedCertificate -Subject "CN=AMGL,E=rhjoerg@gmail.com" -Type CodeSigning -CertStoreLocation "cert:\CurrentUser\My" -NotAfter $date -KeyUsage CertSign,DigitalSignature -KeyUsageProperty All
 $null = Export-PfxCertificate -Cert "cert:\CurrentUser\My\$($cert.Thumbprint)" -FilePath "./out/amgl-private.pfx" -Password $pass
 $null = Export-Certificate -Cert "cert:\CurrentUser\My\$($cert.Thumbprint)" -FilePath "./out/amgl-public.crt"
 

@@ -96,7 +96,8 @@
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>"$(SignTool)" sign /f "$(ProjectDir)..\amgl-certificate\out\amgl-private.pfx" /p "amgl" "$(TargetPath)"
-</PostBuildEvent>
+    <PostBuildEvent>"$(SignTool)" sign /tr http://timestamp.digicert.com /f "$(ProjectDir)..\amgl-certificate\out\amgl-private.pfx" /p "amgl" /td sha256 /fd sha256 "$(TargetPath)"
+
+"$(SignTool)" verify /pa "$(TargetPath)"</PostBuildEvent>
   </PropertyGroup>
 </Project>
