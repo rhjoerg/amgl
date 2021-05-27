@@ -1,4 +1,7 @@
-﻿using System;
+﻿using amgl.model;
+using System;
+using System.IO;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -10,14 +13,12 @@ namespace amgl.actions
         {
             try
             {
-                await Task.Delay(10000, cancellationToken);
+                bool updaterExists = File.Exists(Status.UpdaterPath);
             }
             catch (Exception)
             {
-                Console.WriteLine("Initialize cancelled");
+                // ignored
             }
-
-            Console.WriteLine("Initialize done");
         }
     }
 }

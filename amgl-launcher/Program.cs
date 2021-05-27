@@ -1,4 +1,5 @@
-﻿using amgl.main;
+﻿using amgl.actions;
+using amgl.main;
 using System;
 using System.Diagnostics;
 using System.Reflection;
@@ -11,6 +12,9 @@ namespace amgl
         [STAThread]
         static void Main()
         {
+            if (SelfUpdate())
+                return;
+
             string fileVersion = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion;
             Console.WriteLine(fileVersion);
 
@@ -22,6 +26,18 @@ namespace amgl
             MainController controller = new MainController(form, presenter);
 
             controller.Run();
+        }
+
+        private static bool SelfUpdate()
+        {
+            string path = SelfUpdater.Update();
+
+            if (path == null)
+                return false;
+
+            Process.Start(path);
+
+            return true;
         }
     }
 }

@@ -32,7 +32,7 @@ namespace amgl.main
 
         private async void Form_Load(object sender, EventArgs e)
         {
-            presenter.UpdateButtons();
+            presenter.Update();
             await Initializer.Initialize(cancellationTokenSource.Token);
         }
         private void Form_FormClosing(object sender, FormClosingEventArgs e)
@@ -49,7 +49,7 @@ namespace amgl.main
 
         private void Status_Changed()
         {
-            presenter.UpdateButtons();
+            presenter.Update();
         }
     }
 }

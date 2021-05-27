@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="actions\Initializer.cs" />
+    <Compile Include="actions\SelfUpdater.cs" />
     <Compile Include="main\MainController.cs" />
     <Compile Include="main\MainForm.cs">
       <SubType>Form</SubType>
@@ -108,8 +109,8 @@
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>"$(SignTool)" sign /tr http://timestamp.digicert.com /f "$(ProjectDir)..\amgl-certificate\out\amgl-private.pfx" /p "amgl" /td sha256 /fd sha256 "$(TargetPath)"
+    <PostBuildEvent>rem "$(SignTool)" sign /tr http://timestamp.digicert.com /f "$(ProjectDir)..\amgl-certificate\out\amgl-private.pfx" /p "amgl" /td sha256 /fd sha256 "$(TargetPath)"
 
-"$(SignTool)" verify /pa "$(TargetPath)"</PostBuildEvent>
+rem "$(SignTool)" verify /pa "$(TargetPath)"</PostBuildEvent>
   </PropertyGroup>
 </Project>

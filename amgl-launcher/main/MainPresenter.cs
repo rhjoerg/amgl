@@ -12,8 +12,9 @@ namespace amgl.main
             this.form = form;
         }
 
-        public void UpdateButtons()
+        public void Update()
         {
+            form.Text = "AMGL Launcher - " + Status.Version;
             form.InstallButton.Enabled = Status.UpdateRequired;
         }
     }
