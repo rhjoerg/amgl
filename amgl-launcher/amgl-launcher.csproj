@@ -1,54 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-  <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{893A61BA-4697-44D5-806B-4F28CC512208}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
-    <RootNamespace>amgl_launcher</RootNamespace>
-    <AssemblyName>amgl-launcher</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
-    <PublishUrl>publish\</PublishUrl>
-    <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
-    <UpdateInterval>7</UpdateInterval>
-    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
-    <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>1</ApplicationRevision>
-    <ApplicationVersion>0.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
-    <UseApplicationTrust>false</UseApplicationTrust>
-    <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x64\Debug\</OutputPath>
@@ -71,18 +23,10 @@
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>amgl.Program</StartupObject>
+    <ProjectGuid>{893A61BA-4697-44D5-806B-4F28CC512208}</ProjectGuid>
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>false</SignManifests>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ManifestCertificateThumbprint>AF1AEE5DC8CEDDF1708AF5E26356C6643390D41F</ManifestCertificateThumbprint>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ManifestKeyFile>amgl-private.pfx</ManifestKeyFile>
-  </PropertyGroup>
-  <PropertyGroup>
-    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
     <TargetZone>LocalIntranet</TargetZone>
@@ -92,6 +36,12 @@
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>amgl</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -127,4 +77,26 @@
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <WindowsKitsRoot>$([MSBuild]::GetRegistryValueFromView('HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Kits\Installed Roots', 'KitsRoot10', null, RegistryView.Registry32, RegistryView.Default))</WindowsKitsRoot>
+    <WindowsKitsRoot Condition="'$(WindowsKitsRoot)' == ''">$([MSBuild]::GetRegistryValueFromView('HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Kits\Installed Roots', 'KitsRoot81', null, RegistryView.Registry32, RegistryView.Default))</WindowsKitsRoot>
+    <WindowsKitsRoot Condition="'$(WindowsKitsRoot)' == ''">$([MSBuild]::GetRegistryValueFromView('HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Kits\Installed Roots', 'KitsRoot', null, RegistryView.Registry32, RegistryView.Default))</WindowsKitsRoot>
+    <SignToolPath Condition="'$(SignToolPath)' == '' And '$(Platform)' == 'AnyCPU' and Exists('$(WindowsKitsRoot)bin\x64\signtool.exe')">$(WindowsKitsRoot)bin\x64\</SignToolPath>
+    <SignToolPath Condition="'$(SignToolPath)' == '' And Exists('$(WindowsKitsRoot)bin\$(Platform)\signtool.exe')">$(WindowsKitsRoot)bin\$(Platform)\</SignToolPath>
+    <SignToolPathBin Condition="'$(SignToolPath)' == ''">$([System.IO.Directory]::GetDirectories('$(WindowsKitsRoot)bin',"10.0.*"))</SignToolPathBin>
+    <SignToolPathLen Condition="'$(SignToolPathBin)' != ''">$(SignToolPathBin.Split(';').Length)</SignToolPathLen>
+    <SignToolPathIndex Condition="'$(SignToolPathLen)' != ''">$([MSBuild]::Add(-1, $(SignToolPathLen)))</SignToolPathIndex>
+    <SignToolPathBase Condition="'$(SignToolPathIndex)' != ''">$(SignToolPathBin.Split(';').GetValue($(SignToolPathIndex)))\</SignToolPathBase>
+    <SignToolPath Condition="'$(SignToolPath)' == '' And '$(SignToolPathBase)' != '' And '$(Platform)' == 'AnyCPU'">$(SignToolPathBase)x64\</SignToolPath>
+    <SignToolPath Condition="'$(SignToolPath)' == '' And '$(SignToolPathBase)' != ''">$(SignToolPathBase)$(Platform)\</SignToolPath>
+    <SignTool Condition="'$(SignToolPath)' != ''">$(SignToolPath)signtool.exe</SignTool>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>"$(SignTool)" sign /f "$(ProjectDir)..\amgl-certificate\out\amgl-private.pfx" /p "amgl" "$(TargetPath)"
+</PostBuildEvent>
+  </PropertyGroup>
 </Project>
