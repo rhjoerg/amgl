@@ -13,13 +13,8 @@ namespace amgl.model
 
         private static bool updateRequired = false;
 
-        public static readonly string AssemblyPath = Assembly.GetExecutingAssembly().Location;
+        public static readonly string Version = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion;
 
-        public static readonly string Version = FileVersionInfo.GetVersionInfo(AssemblyPath).FileVersion;
-        public static readonly string Directory = Path.GetDirectoryName(AssemblyPath);
-
-        public static readonly string LauncherPath = Path.Combine(Directory, "amgl-launcher.exe");
-        public static readonly string UpdaterPath = Path.Combine(Directory, "amgl-launcher-update.exe");
 
         public static bool UpdateRequired
         {

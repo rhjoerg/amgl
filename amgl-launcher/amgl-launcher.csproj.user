@@ -13,4 +13,8 @@
   <PropertyGroup>
     <EnableSecurityDebugging>false</EnableSecurityDebugging>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <StartAction>Program</StartAction>
+    <StartProgram>C:\amgldev\git\amgl\amgl-launcher\bin\x64\Debug\amgl-updater.exe</StartProgram>
+  </PropertyGroup>
 </Project>

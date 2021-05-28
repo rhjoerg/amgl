@@ -1,5 +1,6 @@
 ﻿
 using amgl.model;
+using amgl.utils;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -12,10 +13,10 @@ namespace amgl.actions
         public static string Update()
         {
             if (CopyNewLauncher())
-                return Status.LauncherPath;
+                return Files.LauncherPath;
 
             if (IsUpdaterNewer())
-                return Status.UpdaterPath;
+                return Files.UpdaterPath;
 
             DeleteUpdater();
 
@@ -24,40 +25,26 @@ namespace amgl.actions
 
         private static bool CopyNewLauncher()
         {
-            if (!Status.AssemblyPath.Equals(Status.UpdaterPath))
+            if (!Files.AssemblyPath.Equals(Files.UpdaterPath))
                 return false;
 
-            if (File.Exists(Status.LauncherPath))
-            {
-                Thread.Sleep(1000);
-                File.Delete(Status.LauncherPath);
-            }
-
-            File.Copy(Status.UpdaterPath, Status.LauncherPath);
+            Thread.Sleep(1000);
+            File.Copy(Files.UpdaterPath, Files.LauncherPath, true);
 
             return true;
         }
 
         private static bool IsUpdaterNewer()
         {
-            if (!File.Exists(Status.UpdaterPath))
-                return false;
-
-            string launcherVersionString = FileVersionInfo.GetVersionInfo(Status.LauncherPath).FileVersion;
-            string updaterVersionString = FileVersionInfo.GetVersionInfo(Status.UpdaterPath).FileVersion;
-
-            Version launcherVersion = Version.Parse(launcherVersionString);
-            Version updaterVersion = Version.Parse(updaterVersionString);
-
-            return updaterVersion > launcherVersion;
+            return Versions.UpdaterVersion > Versions.LauncherVersion;
         }
 
         private static void DeleteUpdater()
         {
-            if (File.Exists(Status.UpdaterPath))
+            if (File.Exists(Files.UpdaterPath))
             {
                 Thread.Sleep(1000);
-                File.Delete(Status.UpdaterPath);
+                File.Delete(Files.UpdaterPath);
             }
         }
     }
