@@ -20,6 +20,8 @@ namespace amgl.action
                 return;
             }
 
+            Content content = Contents.Load(Files.ContentPath);
+
             progress.Report(Status.Ready());
         }
     }
