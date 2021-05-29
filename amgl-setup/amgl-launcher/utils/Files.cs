@@ -12,5 +12,7 @@ namespace amgl.utils
     {
         public static readonly string AssemblyPath = Assembly.GetExecutingAssembly().Location;
         public static readonly string InstallDir = Path.GetDirectoryName(AssemblyPath);
+
+        public static readonly string ContentPath = Path.Combine(InstallDir, "amgl-content.xml");
     }
 }

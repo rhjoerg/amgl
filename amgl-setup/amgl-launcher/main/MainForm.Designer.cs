@@ -104,6 +104,7 @@ namespace amgl.main
             this.ProgressBar.Maximum = 1000;
             this.ProgressBar.Name = "ProgressBar";
             this.ProgressBar.Size = new System.Drawing.Size(768, 23);
+            this.ProgressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.ProgressBar.TabIndex = 6;
             // 
             // MainForm

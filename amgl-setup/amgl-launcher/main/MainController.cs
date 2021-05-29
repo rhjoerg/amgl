@@ -14,7 +14,10 @@ namespace amgl.main
 
         private readonly CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
 
+        private CancellationToken cancellationToken { get { return cancellationTokenSource.Token; } }
+
         private readonly Progress<Status> progress = new Progress<Status>();
+        private Status status;
 
         public MainController(MainForm form, MainPresenter presenter)
         {
@@ -26,6 +29,7 @@ namespace amgl.main
             form.Load += Form_Load;
             form.FormClosing += Form_FormClosing;
 
+            form.InstallButton.Click += InstallButton_Click;
             form.ExitButton.Click += ExitButton_Click;
         }
 
@@ -48,6 +52,7 @@ namespace amgl.main
 
         private void Progress_ProgressChanged(object sender, Status status)
         {
+            this.status = status;
             presenter.Update(status);
         }
 
@@ -55,7 +60,7 @@ namespace amgl.main
         {
             try
             {
-                await Verify.Run(cancellationTokenSource.Token, progress);
+                await Verify.Run(cancellationToken, progress);
             }
             catch(OperationCanceledException)
             {
@@ -68,9 +73,30 @@ namespace amgl.main
             cancellationTokenSource.Cancel();
         }
 
+        private async void InstallButton_Click(object sender, EventArgs e)
+        {
+            if (status == null)
+                return;
+
+            if (status.State == Status.StateEnum.InstallationRequired)
+                await InstallAsync();
+        }
+
         private void ExitButton_Click(object sender, EventArgs e)
         {
             form.Close();
+        }
+
+        private async Task InstallAsync()
+        {
+            try
+            {
+                await Install.Run(cancellationToken, progress);
+            }
+            catch (OperationCanceledException)
+            {
+                presenter.Update(Status.Cancelled());
+            }
         }
     }
 }

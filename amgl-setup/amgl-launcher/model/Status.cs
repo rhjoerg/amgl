@@ -8,23 +8,39 @@ namespace amgl.model
         public enum StateEnum
         {
             Cancelled,
-            Verifying,
+            Error,
             Ready,
+            InstallationRequired,
+            Verifying,
         }
 
         public readonly string InstallDir = Files.InstallDir;
         public readonly StateEnum State;
         public readonly double Progress;
+        public readonly string Message;
+
+        private Status(StateEnum state, double progress, string message)
+        {
+            State = state;
+            Progress = progress;
+            Message = message;
+        }
 
         private Status(StateEnum state, double progress)
         {
             State = state;
             Progress = progress;
+            Message = "";
         }
 
         public static Status Cancelled()
         {
-            return new Status(StateEnum.Cancelled, 1);
+            return new Status(StateEnum.Cancelled, 0);
+        }
+
+        public static Status Error(string message)
+        {
+            return new Status(StateEnum.Error, 0, message);
         }
 
         public static Status Verifying(double progress)
@@ -34,6 +50,11 @@ namespace amgl.model
         public static Status Ready()
         {
             return new Status(StateEnum.Ready, 1);
+        }
+
+        public static Status InstallationRequired()
+        {
+            return new Status(StateEnum.InstallationRequired, 0);
         }
     }
 }

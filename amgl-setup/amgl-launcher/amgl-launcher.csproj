@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="action\Install.cs" />
     <Compile Include="action\Verify.cs" />
     <Compile Include="main\MainController.cs" />
     <Compile Include="main\MainForm.cs">
@@ -55,9 +56,11 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="main\MainPresenter.cs" />
+    <Compile Include="model\Content.cs" />
     <Compile Include="model\Status.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="utils\Contents.cs" />
     <Compile Include="utils\Files.cs" />
     <EmbeddedResource Include="main\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

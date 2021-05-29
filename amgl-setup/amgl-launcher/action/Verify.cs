@@ -1,6 +1,8 @@
 ﻿using amgl.model;
+using amgl.utils;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -12,11 +14,10 @@ namespace amgl.action
     {
         public static async Task Run(CancellationToken cancellationToken, IProgress<Status> progress)
         {
-            for (int i = 0; i < 10; ++i)
+            if (!File.Exists(Files.ContentPath))
             {
-                await Task.Delay(1000);
-                progress.Report(Status.Verifying((i + 1) / 10.0));
-                cancellationToken.ThrowIfCancellationRequested();
+                progress.Report(Status.InstallationRequired());
+                return;
             }
 
             progress.Report(Status.Ready());

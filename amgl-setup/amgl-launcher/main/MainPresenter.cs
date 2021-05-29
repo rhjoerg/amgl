@@ -12,32 +12,35 @@ namespace amgl.main
         private readonly Dictionary<Status.StateEnum, bool> playable = new Dictionary<Status.StateEnum, bool>();
 
         private readonly Dictionary<Status.StateEnum, string> messages = new Dictionary<Status.StateEnum, string>();
-        private readonly Dictionary<Status.StateEnum, Color> messageColors = new Dictionary<Status.StateEnum, Color>();
-        private readonly Dictionary<Status.StateEnum, Color> barColors = new Dictionary<Status.StateEnum, Color>();
+        private readonly Dictionary<Status.StateEnum, Color> colors = new Dictionary<Status.StateEnum, Color>();
 
         public MainPresenter(MainForm form)
         {
             this.form = form;
 
             installable[Status.StateEnum.Cancelled] = false;
-            installable[Status.StateEnum.Verifying] = false;
+            installable[Status.StateEnum.Error] = false;
             installable[Status.StateEnum.Ready] = false;
+            installable[Status.StateEnum.InstallationRequired] = true;
+            installable[Status.StateEnum.Verifying] = false;
 
             playable[Status.StateEnum.Cancelled] = false;
-            playable[Status.StateEnum.Verifying] = false;
+            playable[Status.StateEnum.Error] = false;
             playable[Status.StateEnum.Ready] = true;
+            playable[Status.StateEnum.InstallationRequired] = false;
+            playable[Status.StateEnum.Verifying] = false;
 
             messages[Status.StateEnum.Cancelled] = "Cancelled.";
-            messages[Status.StateEnum.Verifying] = "Verifying Installation...";
+            messages[Status.StateEnum.Error] = "Error: {0}";
             messages[Status.StateEnum.Ready] = "Ready.";
+            messages[Status.StateEnum.InstallationRequired] = "Installation required!";
+            messages[Status.StateEnum.Verifying] = "Verifying installation...";
 
-            messageColors[Status.StateEnum.Cancelled] = Color.Red;
-            messageColors[Status.StateEnum.Verifying] = Color.Black;
-            messageColors[Status.StateEnum.Ready] = Color.Black;
-
-            barColors[Status.StateEnum.Cancelled] = Color.Red;
-            barColors[Status.StateEnum.Verifying] = Color.Green;
-            barColors[Status.StateEnum.Ready] = Color.Green;
+            colors[Status.StateEnum.Cancelled] = Color.Red;
+            colors[Status.StateEnum.Error] = Color.Red;
+            colors[Status.StateEnum.Ready] = Color.Black;
+            colors[Status.StateEnum.InstallationRequired] = Color.Red;
+            colors[Status.StateEnum.Verifying] = Color.Black;
         }
 
         public void Update(Status status)
@@ -48,10 +51,12 @@ namespace amgl.main
             form.PlayButton.Enabled = playable[status.State];
 
             form.MessageLabel.Text = messages[status.State];
-            form.MessageLabel.ForeColor = messageColors[status.State];
+            form.MessageLabel.ForeColor = colors[status.State];
 
             form.ProgressBar.Value = (int) Math.Round(1000 * status.Progress);
-            form.ProgressBar.ForeColor = barColors[status.State];
+
+            if (status.State == Status.StateEnum.Error)
+                form.MessageLabel.Text = string.Format(messages[status.State], status.Message);
         }
     }
 }
