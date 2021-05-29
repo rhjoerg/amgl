@@ -6,7 +6,7 @@
     <ProductVersion>3.10</ProductVersion>
     <ProjectGuid>6f6eb7f2-a811-4d80-b789-158eb2419be7</ProjectGuid>
     <SchemaVersion>2.0</SchemaVersion>
-    <OutputName>amgl-launcher</OutputName>
+    <OutputName>amgl-0.0.0.1</OutputName>
     <OutputType>Package</OutputType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
