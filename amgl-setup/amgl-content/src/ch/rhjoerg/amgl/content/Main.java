@@ -28,10 +28,36 @@ public class Main
 	
 	public static void main(String[] args) throws Exception
 	{
+		download("http://download.eclipse.org/technology/epp/packages/2021-03/compositeContent.xml");
+		dax("http://download.eclipse.org/technology/epp/packages/2021-03/202103121200/content.jar");
+				
 		dax("http://download.eclipse.org/releases/2021-03/compositeContent.jar");
 		dax("http://download.eclipse.org/releases/2021-03/202103171000/content.jar");
 		
+		units("downloads/download.eclipse.org/technology/epp/packages/2021-03/202103121200/content/content.xml");
 		units("downloads/download.eclipse.org/releases/2021-03/202103171000/content/content.xml");
+		
+		dax("http://download.eclipse.org/technology/epp/packages/2021-03/202103121200/plugins/org.eclipse.epp.package.java_4.19.0.20210311-1200.jar");
+		
+		dax("http://download.eclipse.org/technology/epp/packages/2021-03/202103121200/binary/epp.package.committers.executable.win32.win32.x86_64_4.19.0.20210311-1200", ".zip");
+		dax("http://download.eclipse.org/technology/epp/packages/2021-03/202103121200/binary/epp.package.java.executable.win32.win32.x86_64_4.19.0.20210311-1200", ".zip");
+		
+		dax("https://download.eclipse.org/releases/latest/compositeContent.jar");
+		
+		dax("https://download.eclipse.org/e4/snapshots/org.eclipse.e4.tools/latest/content.jar");
+		units("downloads/download.eclipse.org/e4/snapshots/org.eclipse.e4.tools/latest/content/content.xml");
+		
+		dax("https://download.eclipse.org/eclipse/updates/4.19/compositeContent.jar");
+		
+		dax("https://download.eclipse.org/eclipse/updates/4.19/categories/content.jar");
+		units("downloads/download.eclipse.org/eclipse/updates/4.19/categories/content/content.xml");
+		
+		dax("https://download.eclipse.org/eclipse/updates/4.19/R-4.19-202103031800/content.jar");
+		units("downloads/download.eclipse.org/eclipse/updates/4.19/R-4.19-202103031800/content/content.xml");
+		
+		dax("https://download.eclipse.org/eclipse/updates/4.19/R-4.19-202103031800/binary/org.eclipse.sdk.ide.executable.win32.win32.x86_64_4.19.0.I20210303-1800", ".zip");
+		
+		dax("https://download.java.net/java/GA/jdk15.0.2/0d1cfde4252546c6931946de8db48ee2/7/GPL/openjdk-15.0.2_windows-x64_bin.zip");
 	}
 	
 	private static Path path(String src) throws Exception
@@ -41,21 +67,33 @@ public class Main
 		return Path.of("downloads", uri.getHost(), uri.getPath());
 	}
 	
-	private static void dax(String src) throws Exception
+	private static void dax(String src, String ext) throws Exception
 	{
-		download(src);
-		extract(src);
+		download(src, ext);
+		extract(src + ext);
 	}
 	
-	private static void download(String src) throws Exception
+	private static void dax(String src) throws Exception
 	{
-		Path path = path(src);
+		dax(src, "");
+	}
+	
+	private static Path download(String src, String ext) throws Exception
+	{
+		Path path = path(src + ext);
 		
 		if (Files.exists(path))
-			return;
+			return path;
 		
 		Files.createDirectories(path.getParent());
 		httpClient.send(HttpRequest.newBuilder(new URI(src)).GET().build(), BodyHandlers.ofFile(path));
+		
+		return path;
+	}
+	
+	private static Path download(String src) throws Exception
+	{
+		return download(src, "");
 	}
 	
 	private static void extract(String src) throws Exception
@@ -67,6 +105,9 @@ public class Main
 		{
 			for (ZipEntry entry : Collections.list(zip.entries()))
 			{
+				if (entry.getName().endsWith("/"))
+					continue;
+				
 				try (InputStream is = zip.getInputStream(entry))
 				{
 					Path out = folder.resolve(entry.getName());
@@ -74,7 +115,11 @@ public class Main
 					if (Files.exists(out))
 						continue;
 					
-					Files.createDirectories(out.getParent());
+					Path parent = out.getParent();
+					
+					if (!Files.exists(parent))
+						Files.createDirectories(out.getParent());
+					
 					Files.copy(is, out);
 				}
 			}
