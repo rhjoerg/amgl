@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  
+	<Product Name="AMGL" Language="1033" Version="0.0.0.1" Manufacturer="AMGL"
+           Id="1D19376E-682A-4B7C-845B-423A087E2B71"  
+           UpgradeCode="BEBD998D-9F2F-4B3B-A232-301449495104">
+    
+		<Package Id="*" InstallerVersion="200" Compressed="yes" InstallScope="perMachine"
+             Description="AMGL Launcher" Manufacturer="AMGL" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    
+		<MediaTemplate EmbedCab="yes" />
+
+		<Feature Id="ProductFeature" Title="AMGL" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+		</Feature>
+    
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLFOLDER" Name="AMGL" />
+			</Directory>
+      <Directory Id="ProgramMenuFolder" />
+      <Directory Id="DesktopFolder" />
+    </Directory>
+	</Fragment>
+
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+      <Component Id="amgl.txt.comp" Guid="04DA4E8B-94DE-4A59-BEDA-34C2CD99F5E0" >
+        <File Id="amgl.txt.file" Name="amgl.txt" Source="amgl.txt" KeyPath="yes">
+          <Shortcut Id="amgl.txt.startmenu" Directory="ProgramMenuFolder" Name="AMGL"
+                    WorkingDirectory="INSTALLDIR" Advertise="yes" />
+          <Shortcut Id="amgl.txt.desktop" Directory="DesktopFolder" Name="AMGL"
+                    WorkingDirectory="INSTALLDIR" Advertise="yes" />
+        </File>
+      </Component>
+		</ComponentGroup>
+	</Fragment>
+  
+</Wix>
