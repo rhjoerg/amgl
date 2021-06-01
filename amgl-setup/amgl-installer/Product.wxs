@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
-     xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
   
 	<Product Name="AMGL" Language="1033" Version="0.0.0.1" Manufacturer="AMGL"
            Id="1D19376E-682A-4B7C-845B-423A087E2B71"  
@@ -12,12 +11,6 @@
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
     
 		<MediaTemplate EmbedCab="yes" />
-
-    <PropertyRef Id="NETFRAMEWORK45"/>
-
-    <Condition Message="This application requires .NET Framework 405. Please install the .NET Framework then run this installer again.">
-      <![CDATA[Installed OR NETFRAMEWORK45]]>
-    </Condition>
 
     <Feature Id="ProductFeature" Title="AMGL" Level="1">
 			<ComponentGroupRef Id="ProductComponents" />
