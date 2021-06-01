@@ -4,6 +4,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.31321.278
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "amgl-installer", "amgl-installer\amgl-installer.wixproj", "{E5C084DD-E854-48F7-B01B-E630D806F7D4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F5DCAECA-52CC-4726-99E1-D1F59A60EAB2} = {F5DCAECA-52CC-4726-99E1-D1F59A60EAB2}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "amgl-launcher", "amgl-launcher\amgl-launcher.csproj", "{F5DCAECA-52CC-4726-99E1-D1F59A60EAB2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,6 +24,14 @@ Global
 		{E5C084DD-E854-48F7-B01B-E630D806F7D4}.Release|Any CPU.ActiveCfg = Release|x86
 		{E5C084DD-E854-48F7-B01B-E630D806F7D4}.Release|x86.ActiveCfg = Release|x86
 		{E5C084DD-E854-48F7-B01B-E630D806F7D4}.Release|x86.Build.0 = Release|x86
+		{F5DCAECA-52CC-4726-99E1-D1F59A60EAB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5DCAECA-52CC-4726-99E1-D1F59A60EAB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5DCAECA-52CC-4726-99E1-D1F59A60EAB2}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F5DCAECA-52CC-4726-99E1-D1F59A60EAB2}.Debug|x86.Build.0 = Debug|Any CPU
+		{F5DCAECA-52CC-4726-99E1-D1F59A60EAB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5DCAECA-52CC-4726-99E1-D1F59A60EAB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5DCAECA-52CC-4726-99E1-D1F59A60EAB2}.Release|x86.ActiveCfg = Release|Any CPU
+		{F5DCAECA-52CC-4726-99E1-D1F59A60EAB2}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -12,33 +12,31 @@
     
 		<MediaTemplate EmbedCab="yes" />
 
-    <Feature Id="ProductFeature" Title="AMGL" Level="1">
-			<ComponentGroupRef Id="ProductComponents" />
-		</Feature>
-    
+    <Feature Id="AmglFeature" Level="1">
+      <ComponentRef Id="AmglExeComp"/>
+    </Feature>
+
 	</Product>
 
-	<Fragment>
-		<Directory Id="TARGETDIR" Name="SourceDir">
-			<Directory Id="ProgramFilesFolder">
-				<Directory Id="INSTALLFOLDER" Name="AMGL" />
-			</Directory>
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLFOLDER" Name="AMGL" />
+      </Directory>
       <Directory Id="ProgramMenuFolder" />
       <Directory Id="DesktopFolder" />
     </Directory>
-	</Fragment>
+  </Fragment>
 
-	<Fragment>
-		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
-      <Component Id="amgl.txt.comp" Guid="04DA4E8B-94DE-4A59-BEDA-34C2CD99F5E0" >
-        <File Id="amgl.txt.file" Name="amgl.txt" Source="amgl.txt" KeyPath="yes">
-          <Shortcut Id="amgl.txt.startmenu" Directory="ProgramMenuFolder" Name="AMGL"
-                    WorkingDirectory="INSTALLDIR" Advertise="yes" />
-          <Shortcut Id="amgl.txt.desktop" Directory="DesktopFolder" Name="AMGL"
-                    WorkingDirectory="INSTALLDIR" Advertise="yes" />
+  <Fragment>
+    <DirectoryRef Id="INSTALLFOLDER">
+      <Component Id="AmglExeComp" Guid="04DA4E8B-94DE-4A59-BEDA-34C2CD99F5E0">
+        <File Id="AmglExeFile" Name="amgl.exe" Source="../amgl-launcher/bin/Release/amgl.exe" KeyPath="yes">
+          <Shortcut Id="StartMenuLink" Name="AMGL" Directory="ProgramMenuFolder" Advertise="yes" />
+          <Shortcut Id="DesktopLink" Name="AMGL" Directory="DesktopFolder" Advertise="yes" />
         </File>
       </Component>
-		</ComponentGroup>
-	</Fragment>
-  
+    </DirectoryRef>
+  </Fragment>
+
 </Wix>
