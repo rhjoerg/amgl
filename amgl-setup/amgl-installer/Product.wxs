@@ -13,7 +13,13 @@
     
 		<MediaTemplate EmbedCab="yes" />
 
-		<Feature Id="ProductFeature" Title="AMGL" Level="1">
+    <PropertyRef Id="NETFRAMEWORK45"/>
+
+    <Condition Message="This application requires .NET Framework 405. Please install the .NET Framework then run this installer again.">
+      <![CDATA[Installed OR NETFRAMEWORK45]]>
+    </Condition>
+
+    <Feature Id="ProductFeature" Title="AMGL" Level="1">
 			<ComponentGroupRef Id="ProductComponents" />
 		</Feature>
     
