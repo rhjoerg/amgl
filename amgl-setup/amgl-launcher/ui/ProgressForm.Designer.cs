@@ -1,7 +1,7 @@
 ﻿
 namespace amgl.ui
 {
-    partial class MainForm
+    partial class ProgressForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,47 +29,40 @@ namespace amgl.ui
         /// </summary>
         private void InitializeComponent()
         {
-            this.LogoPanel = new System.Windows.Forms.Panel();
-            this.ContentPanel = new System.Windows.Forms.Panel();
+            this.ProgressLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // LogoPanel
+            // ProgressLabel
             // 
-            this.LogoPanel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.LogoPanel.Location = new System.Drawing.Point(0, 0);
-            this.LogoPanel.Name = "LogoPanel";
-            this.LogoPanel.Size = new System.Drawing.Size(200, 600);
-            this.LogoPanel.TabIndex = 0;
+            this.ProgressLabel.Location = new System.Drawing.Point(10, 10);
+            this.ProgressLabel.Margin = new System.Windows.Forms.Padding(0);
+            this.ProgressLabel.Name = "ProgressLabel";
+            this.ProgressLabel.Size = new System.Drawing.Size(580, 32);
+            this.ProgressLabel.TabIndex = 0;
+            this.ProgressLabel.Text = "...";
+            this.ProgressLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // ContentPanel
-            // 
-            this.ContentPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ContentPanel.Location = new System.Drawing.Point(200, 0);
-            this.ContentPanel.Name = "ContentPanel";
-            this.ContentPanel.Size = new System.Drawing.Size(600, 600);
-            this.ContentPanel.TabIndex = 1;
-            // 
-            // MainForm
+            // ProgressForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 600);
-            this.Controls.Add(this.ContentPanel);
-            this.Controls.Add(this.LogoPanel);
+            this.ClientSize = new System.Drawing.Size(600, 600);
+            this.ControlBox = false;
+            this.Controls.Add(this.ProgressLabel);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximizeBox = false;
-            this.Name = "MainForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "AMGL Launcher";
+            this.MinimizeBox = false;
+            this.Name = "ProgressForm";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        public System.Windows.Forms.Panel LogoPanel;
-        public System.Windows.Forms.Panel ContentPanel;
+        public System.Windows.Forms.Label ProgressLabel;
     }
 }
