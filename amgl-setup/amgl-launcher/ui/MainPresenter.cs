@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
 namespace amgl.ui
@@ -30,6 +31,7 @@ namespace amgl.ui
             this.installPanel = installPanel;
 
             InitPanels();
+            InitButtons();
             InitHandlers();
         }
 
@@ -46,6 +48,24 @@ namespace amgl.ui
 
             form.Controls.Add(progressPanel);
             form.Controls.Add(installPanel);
+        }
+
+        private void InitButtons()
+        {
+            if (Status.IsAdmin)
+                return;
+
+            Icon icon = Icon.FromHandle(SystemIcons.Shield.Handle);
+            Size size = SystemInformation.SmallIconSize;
+            Bitmap bitmap = new Bitmap(size.Width, size.Height);
+
+            using (Graphics graphics = Graphics.FromImage(bitmap))
+            {
+                graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                graphics.DrawIcon(icon, new Rectangle(0, 0, size.Width, size.Height));
+            }
+
+            installPanel.InstallGameButton.Image = bitmap;
         }
 
         private void InitHandlers()

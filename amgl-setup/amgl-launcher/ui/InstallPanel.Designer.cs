@@ -48,9 +48,11 @@ namespace amgl.ui
             this.InstallGameButton.Location = new System.Drawing.Point(10, 50);
             this.InstallGameButton.Margin = new System.Windows.Forms.Padding(0);
             this.InstallGameButton.Name = "InstallGameButton";
+            this.InstallGameButton.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
             this.InstallGameButton.Size = new System.Drawing.Size(120, 30);
             this.InstallGameButton.TabIndex = 1;
             this.InstallGameButton.Text = "Install";
+            this.InstallGameButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.InstallGameButton.UseVisualStyleBackColor = true;
             // 
             // InstallPanel
