@@ -22,12 +22,12 @@ namespace amgl.action
 
         public void Initialize()
         {
-            Report(Status.Verifying());
+            Report(progress, Status.Verifying());
         }
 
-        private void Report(Status status)
+        private void Report(IProgress<Status> progress, Status status)
         {
-            ((IProgress<Status>) progress).Report(status);
+            progress.Report(status);
         }
     }
 }

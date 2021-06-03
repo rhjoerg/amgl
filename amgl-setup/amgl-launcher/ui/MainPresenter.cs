@@ -30,6 +30,10 @@ namespace amgl.ui
         private void InitPresenters()
         {
             presenters[Phase.Verifying] = progressPresenter;
+
+            progressPresenter.Panel.Visible = false;
+            progressPresenter.Panel.Dock = DockStyle.Fill;
+            form.Controls.Add(progressPresenter.Panel);
         }
 
         private void InitHandlers()
@@ -48,31 +52,16 @@ namespace amgl.ui
             if (currentPresenter == presenter)
                 return;
 
-            RemovePanel(currentPresenter);
-            AddPanel(presenter);
-            currentPresenter = presenter;
+            if (currentPresenter != null)
+                currentPresenter.Panel.Visible = false;
+
+            if (presenter != null)
+                presenter.Panel.Visible = true;
         }
 
         private void UpdatePresenter(Status status)
         {
             throw new NotImplementedException();
-        }
-
-        private void RemovePanel(Presenter presenter)
-        {
-            if (presenter == null)
-                return;
-
-            form.Controls.Remove(presenter.Panel);
-        }
-
-        private void AddPanel(Presenter presenter)
-        {
-            if (presenter == null)
-                return;
-
-            presenter.Panel.Dock = DockStyle.Fill;
-            form.Controls.Add(presenter.Panel);
         }
     }
 }
