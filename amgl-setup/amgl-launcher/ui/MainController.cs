@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -11,26 +12,43 @@ namespace amgl.ui
 {
     public class MainController
     {
-        private readonly Worker worker;
         private readonly MainPresenter presenter;
 
-        public MainController(Worker worker, MainPresenter presenter)
+        private readonly CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+
+        private IProgress<Status> Progress
         {
-            this.worker = worker;
+            get { return new Progress<Status>(status => presenter.Update(status)); }
+        }
+
+        private CancellationToken Token
+        {
+            get { return cancellationTokenSource.Token; }
+        }
+
+        public MainController(MainPresenter presenter)
+        {
             this.presenter = presenter;
 
-            worker.Changed += Worker_Changed;
             presenter.Load += OnLoad;
+            presenter.Closing += OnClosing;
         }
 
-        private void OnLoad()
+        private async void OnLoad()
         {
-            worker.Initialize();
+            try
+            {
+                await Verifyer.Verify(Progress, Token);
+            }
+            catch (OperationCanceledException)
+            {
+                // ignored
+            }
         }
 
-        private void Worker_Changed(Status status)
+        private void OnClosing()
         {
-            presenter.Update(status);
+            cancellationTokenSource.Cancel();
         }
     }
 }

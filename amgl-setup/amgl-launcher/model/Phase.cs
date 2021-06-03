@@ -8,6 +8,7 @@ namespace amgl.model
 {
     public enum Phase
     {
-        Verifying
+        Verifying,
+        Ready
     }
 }

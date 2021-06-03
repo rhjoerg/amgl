@@ -13,8 +13,7 @@ namespace amgl
         [STAThread]
         static void Main()
         {
-            Worker worker = new Worker();
-            UI ui = new UI(worker);
+            UI ui = new UI();
 
             ui.Run();
         }

@@ -1,6 +1,7 @@
 ﻿using amgl.model;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace amgl.ui
@@ -10,58 +11,66 @@ namespace amgl.ui
         public delegate void Handler();
 
         public event Handler Load;
+        public event Handler Closing;
 
         private readonly MainForm form;
 
-        private readonly ProgressPresenter progressPresenter;
-        private readonly Dictionary<Phase, Presenter> presenters = new Dictionary<Phase, Presenter>();
+        private readonly ProgressPanel progressPanel;
+        private readonly InstallPanel installPanel;
+        private Control currentPanel = null;
 
-        private Presenter currentPresenter = null;
+        private readonly Dictionary<Phase, Control> panels = new Dictionary<Phase, Control>();
 
-        public MainPresenter(MainForm form, ProgressPresenter progressPresenter)
+        public MainPresenter(MainForm form, ProgressPanel progressPanel, InstallPanel installPanel)
         {
             this.form = form;
-            this.progressPresenter = progressPresenter;
+            this.form.ClientSize = new Size(600, 400);
 
-            InitPresenters();
+            this.progressPanel = progressPanel;
+            this.installPanel = installPanel;
+
+            InitPanels();
             InitHandlers();
         }
 
-        private void InitPresenters()
+        private void InitPanels()
         {
-            presenters[Phase.Verifying] = progressPresenter;
+            panels[Phase.Verifying] = progressPanel;
+            panels[Phase.Ready] = installPanel;
 
-            progressPresenter.Panel.Visible = false;
-            progressPresenter.Panel.Dock = DockStyle.Fill;
-            form.Controls.Add(progressPresenter.Panel);
+            progressPanel.Visible = false;
+            progressPanel.Dock = DockStyle.Fill;
+
+            installPanel.Visible = false;
+            installPanel.Dock = DockStyle.Fill;
+
+            form.Controls.Add(progressPanel);
+            form.Controls.Add(installPanel);
         }
 
         private void InitHandlers()
         {
             form.Load += (s, e) => Load.Invoke();
+            form.FormClosing += (s, e) => Closing.Invoke();
         }
 
         public void Update(Status status)
         {
-            ShowPresenter(presenters[status.Phase]);
-            UpdatePresenter(status);
+            ShowPanel(panels[status.Phase]);
         }
 
-        private void ShowPresenter(Presenter presenter)
+        private void ShowPanel(Control panel)
         {
-            if (currentPresenter == presenter)
+            if (currentPanel == panel)
                 return;
 
-            if (currentPresenter != null)
-                currentPresenter.Panel.Visible = false;
+            if (currentPanel != null)
+                currentPanel.Visible = false;
 
-            if (presenter != null)
-                presenter.Panel.Visible = true;
-        }
+            if (panel != null)
+                panel.Visible = true;
 
-        private void UpdatePresenter(Status status)
-        {
-            throw new NotImplementedException();
+            currentPanel = panel;
         }
     }
 }

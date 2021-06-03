@@ -19,5 +19,10 @@ namespace amgl.model
         {
             return new Status(Phase.Verifying);
         }
+
+        public static Status Ready()
+        {
+            return new Status(Phase.Ready);
+        }
     }
 }

@@ -6,29 +6,23 @@ namespace amgl.ui
     public class UI
     {
         private readonly ProgressPanel progressPanel;
-        private readonly ProgressPresenter progressPresenter;
-
         private readonly InstallPanel installPanel;
-        private readonly InstallPresenter installPresenter;
 
         private readonly MainForm mainForm;
         private readonly MainPresenter mainPresenter;
         private readonly MainController mainController;
 
-        public UI(Worker worker)
+        public UI()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
             progressPanel = new ProgressPanel();
-            progressPresenter = new ProgressPresenter(progressPanel);
-
             installPanel = new InstallPanel();
-            installPresenter = new InstallPresenter(installPanel);
 
             mainForm = new MainForm();
-            mainPresenter = new MainPresenter(mainForm, progressPresenter);
-            mainController = new MainController(worker, mainPresenter);
+            mainPresenter = new MainPresenter(mainForm, progressPanel, installPanel);
+            mainController = new MainController(mainPresenter);
         }
 
         public void Run()

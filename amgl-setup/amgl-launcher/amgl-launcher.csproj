@@ -67,6 +67,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="action\Verifyer.cs" />
     <Compile Include="action\Worker.cs" />
     <Compile Include="model\Phase.cs" />
     <Compile Include="model\Status.cs" />
@@ -78,7 +79,6 @@
     <Compile Include="ui\InstallPanel.Designer.cs">
       <DependentUpon>InstallPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="ui\InstallPresenter.cs" />
     <Compile Include="ui\MainController.cs" />
     <Compile Include="ui\MainForm.cs">
       <SubType>Form</SubType>
@@ -87,14 +87,12 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ui\MainPresenter.cs" />
-    <Compile Include="ui\Presenter.cs" />
     <Compile Include="ui\ProgressPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ui\ProgressPanel.Designer.cs">
       <DependentUpon>ProgressPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="ui\ProgressPresenter.cs" />
     <Compile Include="ui\UI.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
