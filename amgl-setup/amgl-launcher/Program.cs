@@ -1,5 +1,7 @@
-﻿using amgl.ui;
+﻿using amgl.action;
+using amgl.ui;
 using System;
+using System.Drawing;
 
 namespace amgl
 {
@@ -11,9 +13,10 @@ namespace amgl
         [STAThread]
         static void Main()
         {
-            MainController controller = new MainController();
+            Worker worker = new Worker();
+            UI ui = new UI(worker);
 
-            controller.Run();
+            ui.Run();
         }
     }
 }

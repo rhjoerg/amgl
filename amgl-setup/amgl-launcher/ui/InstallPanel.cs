@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace amgl.ui
 {
-    public partial class ProgressForm : Form
+    public partial class InstallPanel : UserControl
     {
-        public ProgressForm()
+        public InstallPanel()
         {
             InitializeComponent();
         }

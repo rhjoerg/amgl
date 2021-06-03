@@ -1,4 +1,6 @@
-﻿using System;
+﻿using amgl.action;
+using amgl.model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,16 +11,26 @@ namespace amgl.ui
 {
     public class MainController
     {
+        private readonly Worker worker;
         private readonly MainPresenter presenter;
 
-        public MainController()
+        public MainController(Worker worker, MainPresenter presenter)
         {
-            presenter = new MainPresenter();
+            this.worker = worker;
+            this.presenter = presenter;
+
+            worker.Changed += Worker_Changed;
+            presenter.Load += OnLoad;
         }
 
-        public void Run()
+        private void OnLoad()
         {
-            Application.Run(presenter.Form);
+            worker.Initialize();
+        }
+
+        private void Worker_Changed(Status status)
+        {
+            presenter.Update(status);
         }
     }
 }

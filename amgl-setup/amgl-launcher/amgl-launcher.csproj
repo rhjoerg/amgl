@@ -67,8 +67,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="action\Worker.cs" />
+    <Compile Include="model\Phase.cs" />
+    <Compile Include="model\Status.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ui\InstallPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ui\InstallPanel.Designer.cs">
+      <DependentUpon>InstallPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ui\InstallPresenter.cs" />
     <Compile Include="ui\MainController.cs" />
     <Compile Include="ui\MainForm.cs">
       <SubType>Form</SubType>
@@ -77,12 +87,15 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ui\MainPresenter.cs" />
-    <Compile Include="ui\ProgressForm.cs">
-      <SubType>Form</SubType>
+    <Compile Include="ui\Presenter.cs" />
+    <Compile Include="ui\ProgressPanel.cs">
+      <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ui\ProgressForm.Designer.cs">
-      <DependentUpon>ProgressForm.cs</DependentUpon>
+    <Compile Include="ui\ProgressPanel.Designer.cs">
+      <DependentUpon>ProgressPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="ui\ProgressPresenter.cs" />
+    <Compile Include="ui\UI.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -93,11 +106,14 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="ui\InstallPanel.resx">
+      <DependentUpon>InstallPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ui\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ui\ProgressForm.resx">
-      <DependentUpon>ProgressForm.cs</DependentUpon>
+    <EmbeddedResource Include="ui\ProgressPanel.resx">
+      <DependentUpon>ProgressPanel.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.manifest" />
     <None Include="Properties\Settings.settings">
