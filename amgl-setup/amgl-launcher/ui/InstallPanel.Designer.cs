@@ -50,7 +50,6 @@ namespace amgl.ui
             this.InstallGameButton.Location = new System.Drawing.Point(10, 50);
             this.InstallGameButton.Margin = new System.Windows.Forms.Padding(0);
             this.InstallGameButton.Name = "InstallGameButton";
-            this.InstallGameButton.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
             this.InstallGameButton.Size = new System.Drawing.Size(120, 30);
             this.InstallGameButton.TabIndex = 1;
             this.InstallGameButton.Text = "Install";
@@ -72,7 +71,6 @@ namespace amgl.ui
             this.InstallDeveloperButton.Location = new System.Drawing.Point(10, 160);
             this.InstallDeveloperButton.Margin = new System.Windows.Forms.Padding(0);
             this.InstallDeveloperButton.Name = "InstallDeveloperButton";
-            this.InstallDeveloperButton.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
             this.InstallDeveloperButton.Size = new System.Drawing.Size(120, 30);
             this.InstallDeveloperButton.TabIndex = 3;
             this.InstallDeveloperButton.Text = "Install";

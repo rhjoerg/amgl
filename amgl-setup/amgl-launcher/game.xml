@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Content>
+  <Directory name="downloads">
+  </Directory>
+  <Directory name="plugins">
+    <Directory name="org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_15.0.2.v20210201-0955">
+    </Directory>
+  </Directory>
+</Content>

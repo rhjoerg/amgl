@@ -1,4 +1,5 @@
 ﻿using amgl.model;
+using amgl.model.content;
 using amgl.util;
 using System;
 using System.Collections.Generic;
@@ -18,27 +19,26 @@ namespace amgl.action
             {
                 progress.Report(Status.Verifying());
 
-                bool gameInstalled = VerifyGame();
-                bool developerInstalled = VerifyDeveloper();
+                bool gameInstalled = Verify(Files.GameXmlPath);
+                bool developerInstalled = Verify(Files.DeveloperXmlPath);
 
                 progress.Report(Status.Ready(gameInstalled, developerInstalled));
             });
         }
 
-        private static bool VerifyGame()
+        private static bool Verify(string contentPath)
         {
-            if (!File.Exists(Files.GameXmlPath))
+            if (!File.Exists(contentPath))
                 return false;
 
-            return true;
+            AmglContent content = AmglContent.Load(contentPath);
+
+            return Verify(content);
         }
 
-        private static bool VerifyDeveloper()
+        private static bool Verify(AmglContent content)
         {
-            if (!File.Exists(Files.DeveloperXmlPath))
-                return false;
-
-            return true;
+            return content.WalkDirectories(directory => Directory.Exists(directory.Path));
         }
     }
 }

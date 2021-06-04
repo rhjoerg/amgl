@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
   
 	<Product Name="AMGL Launcher" Language="1033" Version="0.0.0.1" Manufacturer="AMGL"
            Id="1D19376E-682A-4B7C-845B-423A087E2B71"  
@@ -42,6 +42,7 @@
           <Shortcut Id="StartMenuLink" Name="AMGL" Directory="ProgramMenuFolder" Advertise="yes" />
           <Shortcut Id="DesktopLink" Name="AMGL" Directory="DesktopFolder" Advertise="yes" />
         </File>
+        <RemoveFile Id="GameXml" Name="game.xml" On="uninstall" />
       </Component>
     </DirectoryRef>
   </Fragment>

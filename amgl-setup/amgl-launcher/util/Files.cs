@@ -18,6 +18,11 @@ namespace amgl.util
 
         public static readonly string DeveloperXmlName = "developer.xml";
         public static readonly string DeveloperXmlPath = Path.Combine(InstallDir, DeveloperXmlName);
+
+        public static string Get(string relativePath)
+        {
+            return Path.Combine(InstallDir, relativePath);
+        }
     }
 }
 

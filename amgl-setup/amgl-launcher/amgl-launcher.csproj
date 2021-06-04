@@ -67,7 +67,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="action\Downloader.cs" />
+    <Compile Include="action\Installer.cs" />
     <Compile Include="action\Verifyer.cs" />
+    <Compile Include="model\content\AmglContent.cs" />
+    <Compile Include="model\content\AmglDirectory.cs" />
     <Compile Include="model\Installed.cs" />
     <Compile Include="model\Phase.cs" />
     <Compile Include="model\Status.cs" />
@@ -95,6 +99,7 @@
     </Compile>
     <Compile Include="ui\UI.cs" />
     <Compile Include="util\Files.cs" />
+    <Compile Include="util\Sites.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -142,6 +147,11 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="game.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

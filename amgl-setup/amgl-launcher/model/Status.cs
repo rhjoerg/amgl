@@ -39,5 +39,10 @@ namespace amgl.model
         {
             return new Status(Phase.Ready, new Installed(gameInstalled, developerInstalled));
         }
+
+        public static Status Installing()
+        {
+            return new Status(Phase.Installing, Installed.NotInstalled);
+        }
     }
 }

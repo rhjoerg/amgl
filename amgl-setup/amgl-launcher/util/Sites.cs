@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace amgl.model
+namespace amgl.util
 {
-    public enum Phase
+    public class Sites
     {
-        Verifying,
-        Ready,
-        Installing
+        public static readonly string AMGL = "https://github.com/rhjoerg/amgl/wiki/files/";
     }
 }

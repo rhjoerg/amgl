@@ -32,6 +32,8 @@ namespace amgl.ui
 
             presenter.Load += OnLoad;
             presenter.Closing += OnClosing;
+
+            presenter.InstallGame += OnInstallGame;
         }
 
         private async void OnLoad()
@@ -49,6 +51,18 @@ namespace amgl.ui
         private void OnClosing()
         {
             cancellationTokenSource.Cancel();
+        }
+
+        private async void OnInstallGame()
+        {
+            try
+            {
+                await Installer.InstallGame(Progress, Token);
+            }
+            catch (OperationCanceledException)
+            {
+                // ignored
+            }
         }
     }
 }

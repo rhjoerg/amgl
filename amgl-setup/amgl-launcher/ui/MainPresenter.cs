@@ -14,6 +14,8 @@ namespace amgl.ui
         public event Handler Load;
         public event Handler Closing;
 
+        public event Handler InstallGame;
+
         private readonly MainForm form;
 
         private readonly ProgressPanel progressPanel;
@@ -39,6 +41,7 @@ namespace amgl.ui
         {
             panels[Phase.Verifying] = progressPanel;
             panels[Phase.Ready] = installPanel;
+            panels[Phase.Installing] = progressPanel;
 
             progressPanel.Visible = false;
             progressPanel.Dock = DockStyle.Fill;
@@ -55,6 +58,7 @@ namespace amgl.ui
             if (Status.IsAdmin)
                 return;
 
+            /*
             Icon icon = Icon.FromHandle(SystemIcons.Shield.Handle);
             Size size = SystemInformation.SmallIconSize;
             Bitmap bitmap = new Bitmap(size.Width, size.Height);
@@ -67,12 +71,15 @@ namespace amgl.ui
 
             installPanel.InstallGameButton.Image = bitmap;
             installPanel.InstallDeveloperButton.Image = bitmap;
+            */
         }
 
         private void InitHandlers()
         {
             form.Load += (s, e) => Load.Invoke();
             form.FormClosing += (s, e) => Closing.Invoke();
+
+            installPanel.InstallGameButton.Click += (s, e) => InstallGame.Invoke();
         }
 
         public void Update(Status status)
