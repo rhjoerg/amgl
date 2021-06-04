@@ -21,7 +21,33 @@
       <ComponentRef Id="AmglExeComp"/>
     </Feature>
 
-    <UI>
+    <UIRef Id="AMGL_UI"/>
+
+	</Product>
+
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="WindowsVolume">
+        <Directory Id="INSTALLFOLDER" Name="amgl" />
+      </Directory>
+      <Directory Id="ProgramMenuFolder" />
+      <Directory Id="DesktopFolder" />
+    </Directory>
+  </Fragment>
+
+  <Fragment>
+    <DirectoryRef Id="INSTALLFOLDER">
+      <Component Id="AmglExeComp" Guid="04DA4E8B-94DE-4A59-BEDA-34C2CD99F5E0">
+        <File Id="AmglExeFile" Name="amgl.exe" Source="../amgl-launcher/bin/Release/amgl.exe" KeyPath="yes">
+          <Shortcut Id="StartMenuLink" Name="AMGL" Directory="ProgramMenuFolder" Advertise="yes" />
+          <Shortcut Id="DesktopLink" Name="AMGL" Directory="DesktopFolder" Advertise="yes" />
+        </File>
+      </Component>
+    </DirectoryRef>
+  </Fragment>
+
+  <Fragment>
+    <UI Id="AMGL_UI">
       <TextStyle Id="WixUI_Font_Normal" FaceName="Tahoma" Size="8" />
       <TextStyle Id="WixUI_Font_Bigger" FaceName="Tahoma" Size="12" />
       <TextStyle Id="WixUI_Font_Title" FaceName="Tahoma" Size="9" Bold="yes" />
@@ -49,32 +75,8 @@
       <Publish Dialog="MaintenanceTypeDlg" Control="Back" Event="NewDialog" Value="MaintenanceWelcomeDlg">1</Publish>
 
       <Property Id="ARPNOMODIFY" Value="1" />
-
     </UI>
-
     <UIRef Id="WixUI_Common" />
-
-	</Product>
-
-  <Fragment>
-    <Directory Id="TARGETDIR" Name="SourceDir">
-      <Directory Id="ProgramFilesFolder">
-        <Directory Id="INSTALLFOLDER" Name="AMGL" />
-      </Directory>
-      <Directory Id="ProgramMenuFolder" />
-      <Directory Id="DesktopFolder" />
-    </Directory>
-  </Fragment>
-
-  <Fragment>
-    <DirectoryRef Id="INSTALLFOLDER">
-      <Component Id="AmglExeComp" Guid="04DA4E8B-94DE-4A59-BEDA-34C2CD99F5E0">
-        <File Id="AmglExeFile" Name="amgl.exe" Source="../amgl-launcher/bin/Release/amgl.exe" KeyPath="yes">
-          <Shortcut Id="StartMenuLink" Name="AMGL" Directory="ProgramMenuFolder" Advertise="yes" />
-          <Shortcut Id="DesktopLink" Name="AMGL" Directory="DesktopFolder" Advertise="yes" />
-        </File>
-      </Component>
-    </DirectoryRef>
   </Fragment>
 
 </Wix>
