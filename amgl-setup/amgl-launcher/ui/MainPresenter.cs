@@ -87,9 +87,14 @@ namespace amgl.ui
             ShowPanel(panels[status.Phase]);
 
             bool ready = status.Phase == Phase.Ready;
+            bool gameInstalled = status.Installed.GameInstalled;
+            bool developerInstalled = status.Installed.DeveloperInstalled;
 
-            installPanel.InstallGameButton.Enabled = ready && !status.Installed.GameInstalled;
-            installPanel.InstallDeveloperButton.Enabled = ready && !status.Installed.DeveloperInstalled;
+            installPanel.InstallGameButton.Enabled = ready && !gameInstalled;
+            installPanel.InstallDeveloperButton.Enabled = ready && gameInstalled && !developerInstalled;
+
+            progressPanel.ProgressLabel.Text = status.Message;
+            progressPanel.ProgressBar.Value = (int) Math.Round(status.Progress * progressPanel.ProgressBar.Maximum);
         }
 
         private void ShowPanel(Control panel)

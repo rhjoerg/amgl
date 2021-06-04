@@ -56,6 +56,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -69,9 +70,12 @@
   <ItemGroup>
     <Compile Include="action\Downloader.cs" />
     <Compile Include="action\Installer.cs" />
+    <Compile Include="action\ProgressRange.cs" />
     <Compile Include="action\Verifyer.cs" />
+    <Compile Include="model\content\AmglArchive.cs" />
     <Compile Include="model\content\AmglContent.cs" />
     <Compile Include="model\content\AmglDirectory.cs" />
+    <Compile Include="model\content\AmglFile.cs" />
     <Compile Include="model\Installed.cs" />
     <Compile Include="model\Phase.cs" />
     <Compile Include="model\Status.cs" />
@@ -98,8 +102,9 @@
       <DependentUpon>ProgressPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="ui\UI.cs" />
-    <Compile Include="util\Files.cs" />
+    <Compile Include="util\FileUtils.cs" />
     <Compile Include="util\Sites.cs" />
+    <Compile Include="util\ZipArchives.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

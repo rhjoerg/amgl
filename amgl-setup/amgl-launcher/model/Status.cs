@@ -24,15 +24,28 @@ namespace amgl.model
         public readonly Phase Phase;
         public readonly Installed Installed;
 
+        public readonly string Message;
+        public readonly double Progress;
+
         private Status(Phase phase, Installed installed)
         {
             Phase = phase;
             Installed = installed;
+            Message = "";
+            Progress = 0;
         }
 
-        public static Status Verifying()
+        private Status(Phase phase, string message, double progress)
         {
-            return new Status(Phase.Verifying, Installed.NotInstalled);
+            Phase = phase;
+            Installed = Installed.NotInstalled;
+            Message = message;
+            Progress = progress;
+        }
+
+        public static Status Verifying(double progress)
+        {
+            return new Status(Phase.Verifying, "Verifying Installation...", progress);
         }
 
         public static Status Ready(bool gameInstalled, bool developerInstalled)
@@ -40,9 +53,9 @@ namespace amgl.model
             return new Status(Phase.Ready, new Installed(gameInstalled, developerInstalled));
         }
 
-        public static Status Installing()
+        public static Status Installing(double progress, string component)
         {
-            return new Status(Phase.Installing, Installed.NotInstalled);
+            return new Status(Phase.Installing, "Installing: " + component, progress);
         }
     }
 }

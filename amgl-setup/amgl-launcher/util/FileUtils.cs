@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace amgl.util
 {
-    public static class Files
+    public static class FileUtils
     {
         public static readonly string AssemblyPath = Assembly.GetExecutingAssembly().Location;
         public static readonly string InstallDir = Path.GetDirectoryName(AssemblyPath);
@@ -18,6 +13,11 @@ namespace amgl.util
 
         public static readonly string DeveloperXmlName = "developer.xml";
         public static readonly string DeveloperXmlPath = Path.Combine(InstallDir, DeveloperXmlName);
+
+        public static string Combine(string path1, string path2)
+        {
+            return Path.Combine(path1, path2);
+        }
 
         public static string Get(string relativePath)
         {
