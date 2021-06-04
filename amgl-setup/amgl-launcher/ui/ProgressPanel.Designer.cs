@@ -35,7 +35,7 @@ namespace amgl.ui
             // 
             // ProgressLabel
             // 
-            this.ProgressLabel.Location = new System.Drawing.Point(10, 10);
+            this.ProgressLabel.Location = new System.Drawing.Point(10, 70);
             this.ProgressLabel.Margin = new System.Windows.Forms.Padding(0);
             this.ProgressLabel.Name = "ProgressLabel";
             this.ProgressLabel.Size = new System.Drawing.Size(580, 30);
@@ -44,7 +44,7 @@ namespace amgl.ui
             // 
             // ProgressBar
             // 
-            this.ProgressBar.Location = new System.Drawing.Point(10, 50);
+            this.ProgressBar.Location = new System.Drawing.Point(10, 110);
             this.ProgressBar.Margin = new System.Windows.Forms.Padding(0);
             this.ProgressBar.Maximum = 1000;
             this.ProgressBar.Name = "ProgressBar";
@@ -60,7 +60,7 @@ namespace amgl.ui
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "ProgressPanel";
-            this.Size = new System.Drawing.Size(600, 400);
+            this.Size = new System.Drawing.Size(600, 200);
             this.ResumeLayout(false);
 
         }

@@ -22,20 +22,22 @@ namespace amgl.model
         }
 
         public readonly Phase Phase;
+        public readonly Installed Installed;
 
-        private Status(Phase phase)
+        private Status(Phase phase, Installed installed)
         {
             Phase = phase;
+            Installed = installed;
         }
 
         public static Status Verifying()
         {
-            return new Status(Phase.Verifying);
+            return new Status(Phase.Verifying, Installed.NotInstalled);
         }
 
-        public static Status Ready()
+        public static Status Ready(bool gameInstalled, bool developerInstalled)
         {
-            return new Status(Phase.Ready);
+            return new Status(Phase.Ready, new Installed(gameInstalled, developerInstalled));
         }
     }
 }

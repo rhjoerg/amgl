@@ -68,7 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="action\Verifyer.cs" />
-    <Compile Include="action\Worker.cs" />
+    <Compile Include="model\Installed.cs" />
     <Compile Include="model\Phase.cs" />
     <Compile Include="model\Status.cs" />
     <Compile Include="Program.cs" />
@@ -94,6 +94,7 @@
       <DependentUpon>ProgressPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="ui\UI.cs" />
+    <Compile Include="util\Files.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

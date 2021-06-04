@@ -25,7 +25,7 @@ namespace amgl.ui
         public MainPresenter(MainForm form, ProgressPanel progressPanel, InstallPanel installPanel)
         {
             this.form = form;
-            this.form.ClientSize = new Size(600, 400);
+            this.form.ClientSize = new Size(600, 200);
 
             this.progressPanel = progressPanel;
             this.installPanel = installPanel;
@@ -66,6 +66,7 @@ namespace amgl.ui
             }
 
             installPanel.InstallGameButton.Image = bitmap;
+            installPanel.InstallDeveloperButton.Image = bitmap;
         }
 
         private void InitHandlers()
@@ -77,6 +78,11 @@ namespace amgl.ui
         public void Update(Status status)
         {
             ShowPanel(panels[status.Phase]);
+
+            bool ready = status.Phase == Phase.Ready;
+
+            installPanel.InstallGameButton.Enabled = ready && !status.Installed.GameInstalled;
+            installPanel.InstallDeveloperButton.Enabled = ready && !status.Installed.DeveloperInstalled;
         }
 
         private void ShowPanel(Control panel)
