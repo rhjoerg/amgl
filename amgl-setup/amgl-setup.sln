@@ -10,6 +10,10 @@ Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "amgl-installer", "amgl-inst
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "amgl-launcher", "amgl-launcher\amgl-launcher.csproj", "{F5DCAECA-52CC-4726-99E1-D1F59A60EAB2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "amgl-content-model", "amgl-content-model\amgl-content-model.csproj", "{5ABA18D5-F957-4960-834F-4BB9EA492643}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "amgl-content-creator", "amgl-content-creator\amgl-content-creator.csproj", "{7BD885EC-2C31-4D3D-B8BF-A1AD2CA1FC3A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +36,22 @@ Global
 		{F5DCAECA-52CC-4726-99E1-D1F59A60EAB2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F5DCAECA-52CC-4726-99E1-D1F59A60EAB2}.Release|x86.ActiveCfg = Release|Any CPU
 		{F5DCAECA-52CC-4726-99E1-D1F59A60EAB2}.Release|x86.Build.0 = Release|Any CPU
+		{5ABA18D5-F957-4960-834F-4BB9EA492643}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5ABA18D5-F957-4960-834F-4BB9EA492643}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5ABA18D5-F957-4960-834F-4BB9EA492643}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5ABA18D5-F957-4960-834F-4BB9EA492643}.Debug|x86.Build.0 = Debug|Any CPU
+		{5ABA18D5-F957-4960-834F-4BB9EA492643}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5ABA18D5-F957-4960-834F-4BB9EA492643}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5ABA18D5-F957-4960-834F-4BB9EA492643}.Release|x86.ActiveCfg = Release|Any CPU
+		{5ABA18D5-F957-4960-834F-4BB9EA492643}.Release|x86.Build.0 = Release|Any CPU
+		{7BD885EC-2C31-4D3D-B8BF-A1AD2CA1FC3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BD885EC-2C31-4D3D-B8BF-A1AD2CA1FC3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BD885EC-2C31-4D3D-B8BF-A1AD2CA1FC3A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7BD885EC-2C31-4D3D-B8BF-A1AD2CA1FC3A}.Debug|x86.Build.0 = Debug|Any CPU
+		{7BD885EC-2C31-4D3D-B8BF-A1AD2CA1FC3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BD885EC-2C31-4D3D-B8BF-A1AD2CA1FC3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BD885EC-2C31-4D3D-B8BF-A1AD2CA1FC3A}.Release|x86.ActiveCfg = Release|Any CPU
+		{7BD885EC-2C31-4D3D-B8BF-A1AD2CA1FC3A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
