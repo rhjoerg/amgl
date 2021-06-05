@@ -17,7 +17,7 @@ namespace amgl.model
         {
         }
 
-        public AmglArchive(string id, string name, AmglBase @base, string source) : base(name, @base, source)
+        public AmglArchive(string id, string name, AmglBase bas, string source) : base(name, bas, source)
         {
             Id = id;
         }

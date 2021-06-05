@@ -19,6 +19,9 @@ namespace amgl.model
         [XmlAttribute("Base")]
         public string BaseId;
 
+        [XmlIgnore]
+        public AmglBase Base;
+
         [XmlAttribute("Source")]
         public string Source;
 
@@ -33,10 +36,11 @@ namespace amgl.model
             Entry = entry;
         }
 
-        public AmglFile(string name, AmglBase @base, string source)
+        public AmglFile(string name, AmglBase bas, string source)
         {
             Name = name;
-            BaseId = @base.Id;
+            BaseId = bas.Id;
+            Base = bas;
             Source = source;
         }
 
