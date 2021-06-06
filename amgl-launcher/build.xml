@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="amgl-lauvher" default="default">
+
+    <target name="default" depends="clean">
+    	
+    	<exec executable="msbuild">
+    		<arg line="amgl-launcher.sln" />
+    	</exec>
+    	
+    </target>
+	
+	<target name="clean">
+		<exec executable="msbuild">
+			<arg line="amgl-launcher.sln" />
+			<arg line="-t:Clean"/>
+		</exec>
+	</target>
+
+</project>
