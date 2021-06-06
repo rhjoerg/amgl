@@ -1,19 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="amgl-lauvher" default="default">
 
-    <target name="default" depends="clean">
-    	
-    	<exec executable="msbuild">
-    		<arg line="amgl-launcher.sln" />
-    	</exec>
-    	
+	<available property="ilrepack.exists" file="bin/ILRepack.exe" />
+
+    <target name="default">
+    	<antcall target="clean" />
+    	<antcall target="build.exe" />
+    	<antcall target="merge.exe" />
     </target>
 	
-	<target name="clean">
-		<exec executable="msbuild">
-			<arg line="amgl-launcher.sln" />
-			<arg line="-t:Clean"/>
+	<target name="build.exe">
+    	<exec executable="msbuild" dir="amgl-launcher-exe" failonerror="true">
+    		<arg line="-p:Configuration=Release"/>
+    	</exec>
+	</target>
+	
+	<target name="merge.exe" depends="install.ilrepack">
+		<exec executable="${basedir}/bin/ILRepack.exe">
+			<arg line="/out:bin/amgl.exe" />
+			<arg line="amgl-launcher-exe/bin/Release/amgl.exe" />
 		</exec>
 	</target>
-
+	
+	<target name="clean">
+		
+		<exec executable="msbuild">
+			<arg line="amgl-launcher.sln" />
+			<arg line="-p:Configuration=Debug"/>
+			<arg line="-t:Clean"/>
+		</exec>
+		
+		<exec executable="msbuild">
+			<arg line="amgl-launcher.sln" />
+			<arg line="-p:Configuration=Release"/>
+			<arg line="-t:Clean"/>
+		</exec>
+		
+		<delete dir="bin" includes="amgl.*" />
+		
+	</target>
+	
+	<target name="install.ilrepack" unless="ilrepack.exists">
+		
+		<mkdir dir="bin" />
+		<mkdir dir="downloads" />
+		<mkdir dir="temp" />
+		
+		<get usetimestamp="true" src="https://globalcdn.nuget.org/packages/ilrepack.2.0.18.nupkg" dest="downloads/ilrepack.zip" />
+		<unzip src="downloads/ilrepack.zip" dest="temp" />
+		<copy file="temp/tools/ILRepack.exe" todir="bin" />
+		<delete dir="temp" />
+		
+	</target>
+	
 </project>
