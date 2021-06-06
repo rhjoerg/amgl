@@ -2,7 +2,7 @@
 
 namespace amgl.model
 {
-    public class AmglBase
+    public class AmglBase : AmglElement
     {
         [XmlAttribute("Id")]
         public string Id;
@@ -10,14 +10,16 @@ namespace amgl.model
         [XmlAttribute("Href")]
         public string Href;
 
-        public AmglBase()
-        {
-        }
-
-        public AmglBase(string id, string href)
+        public AmglBase(AmglContent parent, string id, string href) : base(parent, "")
         {
             Id = id;
             Href = href;
+
+            if (parent != null)
+                parent.Bases.Add(this);
+        }
+        public AmglBase() : this(null, null, null)
+        {
         }
     }
 }

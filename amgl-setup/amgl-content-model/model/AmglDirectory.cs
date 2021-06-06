@@ -4,130 +4,75 @@ using System.Xml.Serialization;
 
 namespace amgl.model
 {
-    public class AmglDirectory
+    public class AmglDirectory : AmglElement
     {
-        [XmlAttribute("Name")]
-        public string Name;
-
         [XmlElement("Directory")]
-        public AmglDirectory[] DirectoriesArray;
-
-        [XmlIgnore]
-        public List<AmglDirectory> Directories => new List<AmglDirectory>(DirectoriesArray ?? new AmglDirectory[0]);
+        public List<AmglDirectory> Directories;
 
         [XmlElement("Archive")]
-        public AmglArchive[] ArchivesArray;
-
-        [XmlIgnore]
-        public List<AmglArchive> Archives => new List<AmglArchive>(ArchivesArray ?? new AmglArchive[0]);
+        public List<AmglArchive> Archives;
 
         [XmlElement("File")]
-        public AmglFile[] FilesArray;
+        public List<AmglFile> Files;
 
-        [XmlIgnore]
-        public List<AmglFile> Files => new List<AmglFile>(FilesArray ?? new AmglFile[0]);
+        public AmglDirectory(AmglDirectory parent, string name) : base(parent, name)
+        {
+            Directories = new List<AmglDirectory>();
+            Archives = new List<AmglArchive>();
+            Files = new List<AmglFile>();
 
-        [XmlIgnore]
-        public AmglDirectory Parent;
+            if (parent != null)
+                parent.Directories.Add(this);
+        }
 
-        [XmlIgnore]
-        public virtual string Path => System.IO.Path.Combine(Parent.Path, Name);
-
-        public AmglDirectory()
+        public AmglDirectory() : this(null, null)
         {
         }
 
-        public AmglDirectory(string name)
+        public override void Dispose()
         {
-            Name = name;
-        }
+            WalkDirectories(i => { i.Dispose(); return true; });
+            WalkArchives(i => { i.Dispose(); return true; });
+            WalkFiles(i => { i.Dispose(); return true; });
 
-        public void AddDirectory(AmglDirectory directory)
-        {
-            if (DirectoriesArray == null) DirectoriesArray = new AmglDirectory[0];
-            Array.Resize(ref DirectoriesArray, DirectoriesArray.Length + 1);
-            DirectoriesArray[^1] = directory;
-        }
+            Directories.Clear();
+            Archives.Clear();
+            Files.Clear();
 
-        public void AddArchive(AmglArchive archive)
-        {
-            if (ArchivesArray == null) ArchivesArray = new AmglArchive[0];
-            Array.Resize(ref ArchivesArray, ArchivesArray.Length + 1);
-            ArchivesArray[^1] = archive;
-        }
-
-        public void AddFile(AmglFile file)
-        {
-            if (FilesArray == null) FilesArray = new AmglFile[0];
-            Array.Resize(ref FilesArray, FilesArray.Length + 1);
-            FilesArray[^1] = file;
+            base.Dispose();
         }
 
         public delegate bool WalkCallback<T>(T obj);
         public delegate bool WalkCallbackEx<T>(AmglDirectory parent, T obj);
 
-        public bool WalkDirectories(WalkCallback<AmglDirectory> callback)
+        public bool WalkDirectories(WalkCallback<AmglDirectory> cb)
         {
-            foreach (AmglDirectory directory in Directories)
-            {
-                if (!callback(directory)) return false;
-                if (!directory.WalkDirectories(callback)) return false;
-            }
-            return true;
+            return Directories.Find(d => !(cb(d) && d.WalkDirectories(cb))) == null;
         }
 
-        public bool WalkDirectories(WalkCallbackEx<AmglDirectory> callback)
+        public bool WalkDirectories(WalkCallbackEx<AmglDirectory> cb)
         {
-            foreach (AmglDirectory directory in Directories)
-            {
-                if (!callback(this, directory)) return false;
-                if (!directory.WalkDirectories(callback)) return false;
-            }
-            return true;
+            return Directories.Find(d => !(cb(this, d) && d.WalkDirectories(cb))) == null;
         }
 
-        public bool WalkArchives(WalkCallback<AmglArchive> callback)
+        public bool WalkArchives(WalkCallback<AmglArchive> cb)
         {
-            foreach (AmglArchive archive in Archives)
-                if (!callback(archive)) return false;
-
-            foreach (AmglDirectory directory in Directories)
-                if (!directory.WalkArchives(callback)) return false;
-
-            return true;
+            return Archives.Find(a => !cb(a)) == null && Directories.Find(d => !d.WalkArchives(cb)) == null;
         }
 
-        public bool WalkArchives(WalkCallbackEx<AmglArchive> callback)
+        public bool WalkArchives(WalkCallbackEx<AmglArchive> cb)
         {
-            foreach (AmglArchive archive in Archives)
-                if (!callback(this, archive)) return false;
-
-            foreach (AmglDirectory directory in Directories)
-                if (!directory.WalkArchives(callback)) return false;
-
-            return true;
+            return Archives.Find(a => !cb(this, a)) == null && Directories.Find(d => !d.WalkArchives(cb)) == null;
         }
 
-        public bool WalkFiles(WalkCallback<AmglFile> callback)
+        public bool WalkFiles(WalkCallback<AmglFile> cb)
         {
-            foreach (AmglFile file in Files)
-                if (!callback(file)) return false;
-
-            foreach (AmglDirectory directory in Directories)
-                if (!directory.WalkFiles(callback)) return false;
-
-            return true;
+            return Files.Find(f => !cb(f)) == null && Directories.Find(d => !d.WalkFiles(cb)) == null;
         }
 
-        public bool WalkFiles(WalkCallbackEx<AmglFile> callback)
+        public bool WalkFiles(WalkCallbackEx<AmglFile> cb)
         {
-            foreach (AmglFile file in Files)
-                if (!callback(this, file)) return false;
-
-            foreach (AmglDirectory directory in Directories)
-                if (!directory.WalkFiles(callback)) return false;
-
-            return true;
+            return Files.Find(f => !cb(this, f)) == null && Directories.Find(d => !d.WalkFiles(cb)) == null;
         }
     }
 }

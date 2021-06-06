@@ -12,7 +12,10 @@ namespace amgl.model
     public class AmglContent : AmglDirectory
     {
         [XmlIgnore]
-        public override string Path => System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+        public override AmglContent Content => this;
+
+        [XmlIgnore]
+        public override string Path => "";
 
         [XmlAttribute("Version")]
         public string VersionString;
@@ -21,10 +24,18 @@ namespace amgl.model
         public Version Version => Version.Parse(VersionString);
 
         [XmlElement("Base")]
-        public AmglBase[] BasesArray;
+        public List<AmglBase> Bases;
 
         [XmlIgnore]
-        public List<AmglBase> Bases => new List<AmglBase>(BasesArray ?? new AmglBase[0]);
+        public Dictionary<string, AmglArchive> ArchivesMap
+        {
+            get
+            {
+                Dictionary<string, AmglArchive> map = new Dictionary<string, AmglArchive>();
+                WalkArchives(a => { map[a.Id] = a; return true; });
+                return map;
+            }
+        }
 
         [XmlIgnore]
         public Dictionary<string, AmglBase> BasesMap
@@ -39,20 +50,46 @@ namespace amgl.model
 
         public AmglContent()
         {
+            Bases = new List<AmglBase>();
         }
 
-        public AmglContent(string version)
+        public AmglContent(string version) : this()
         {
             VersionString = version;
         }
 
-        public void AddBase(AmglBase bas)
+        public override void Dispose()
         {
-            if (BasesArray == null)
-                BasesArray = new AmglBase[0];
+            WalkBases(b => { b.Dispose(); return true; });
+            Bases.Clear();
 
-            Array.Resize(ref BasesArray, BasesArray.Length + 1);
-            BasesArray[^1] = bas;
+            base.Dispose();
+        }
+
+        public bool WalkBases(WalkCallback<AmglBase> cb)
+        {
+            return Bases.Find(b => !cb(b)) == null;
+        }
+
+        public bool WalkBases(WalkCallbackEx<AmglBase> cb)
+        {
+            return Bases.Find(b => !cb(this, b)) == null;
+        }
+
+        private void Link()
+        {
+            WalkDirectories((p, i) => { i.Parent = p; return true; });
+            WalkArchives((p, i) => { i.Parent = p; return true; });
+            WalkFiles((p, i) => { i.Parent = p; return true; });
+            WalkBases((p, i) => { i.Parent = p; return true; });
+
+            Dictionary<string, AmglBase> basesMap = BasesMap;
+            Dictionary<string, AmglArchive> archivesMap = ArchivesMap;
+
+            WalkArchives(i => { if (i.BaseId != null) i.Base = basesMap[i.BaseId]; return true; });
+
+            WalkFiles(i => { if (i.BaseId != null) i.Base = basesMap[i.BaseId]; return true; });
+            WalkFiles(i => { if(i.ArchiveId != null) i.Archive = archivesMap[i.ArchiveId]; return true; });
         }
 
         public void Write(string path)
@@ -76,8 +113,11 @@ namespace amgl.model
         {
             XmlSerializer serializer = new XmlSerializer(typeof(AmglContent));
             using Stream stream = new FileStream(path, FileMode.Open);
+            AmglContent content = (AmglContent)serializer.Deserialize(stream);
 
-            return (AmglContent) serializer.Deserialize(stream);
+            content.Link();
+
+            return content;
         }
     }
 }

@@ -5,26 +5,48 @@ using System.Xml.Serialization;
 
 namespace amgl.model
 {
-    public class AmglArchive : AmglFile
+    public class AmglArchive : AmglElement
     {
         [XmlAttribute("Id")]
         public string Id;
 
         [XmlIgnore]
+        public AmglBase Base;
+
+        [XmlAttribute("Base")]
+        public string BaseId;
+
+        [XmlAttribute("Source")]
+        public string Source;
+
+        [XmlIgnore]
         public bool Required = false;
 
+        public AmglArchive(AmglDirectory parent, string id, string name, AmglBase bas, string source) : base(parent, name)
+        {
+            Id = id;
+            Base = bas;
+            Source = source;
+
+            if (parent != null) parent.Archives.Add(this);
+            if (bas != null) BaseId = bas.Id;
+        }
+
         public AmglArchive()
+            : this(null, null, null, null, null)
         {
         }
 
-        public AmglArchive(string id, string name, AmglBase bas, string source) : base(name, bas, source)
+        public AmglArchive(AmglDirectory parent, string id, string name, string source)
+            : this(parent, id, name, null, source)
         {
-            Id = id;
         }
 
-        public AmglArchive(string id, string name, string source) : base(name, source)
+        public override void Dispose()
         {
-            Id = id;
+            Base = null;
+
+            base.Dispose();
         }
     }
 }

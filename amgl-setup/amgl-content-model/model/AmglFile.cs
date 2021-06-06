@@ -5,10 +5,10 @@ using System.Xml.Serialization;
 
 namespace amgl.model
 {
-    public class AmglFile
+    public class AmglFile : AmglElement
     {
-        [XmlAttribute("Name")]
-        public string Name;
+        [XmlIgnore]
+        public AmglArchive Archive;
 
         [XmlAttribute("Archive")]
         public string ArchiveId;
@@ -16,38 +16,53 @@ namespace amgl.model
         [XmlAttribute("Entry")]
         public string Entry;
 
-        [XmlAttribute("Base")]
-        public string BaseId;
-
         [XmlIgnore]
         public AmglBase Base;
+
+        [XmlAttribute("Base")]
+        public string BaseId;
 
         [XmlAttribute("Source")]
         public string Source;
 
-        public AmglFile()
+        protected AmglFile(AmglDirectory parent, string name, AmglArchive archive, string entry, AmglBase bas, string source)
+            : base(parent, name)
         {
-        }
-
-        public AmglFile(string name, AmglArchive archive, string entry)
-        {
-            Name = name;
-            ArchiveId = archive.Id;
+            Archive = archive;
             Entry = entry;
-        }
-
-        public AmglFile(string name, AmglBase bas, string source)
-        {
-            Name = name;
-            BaseId = bas.Id;
             Base = bas;
             Source = source;
+
+            if (parent != null) parent.Files.Add(this);
+            if (archive != null) ArchiveId = archive.Id;
+            if (bas != null) BaseId = bas.Id;
         }
 
-        public AmglFile(string name, string source)
+        public AmglFile() : this(null, null, null, null, null, null)
         {
-            Name = name;
-            Source = source;
+        }
+
+        public AmglFile(AmglDirectory parent, string name, AmglArchive archive, string entry)
+            : this(parent, name, archive, entry, null, null)
+        {
+        }
+
+        public AmglFile(AmglDirectory parent, string name, AmglBase bas, string source)
+            : this(parent, name, null, null, bas, source)
+        {
+        }
+
+        public AmglFile(AmglDirectory parent, string name, string source)
+            : this(parent, name, null, null, null, source)
+        {
+        }
+
+        public override void Dispose()
+        {
+            Archive = null;
+            Base = null;
+
+            base.Dispose();
         }
     }
 }
