@@ -1,3 +1,5 @@
 .vs/
 bin/
 downloads/
+temp/
+tools/

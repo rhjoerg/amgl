@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+
+	<Product Name="AMGL Launcher" Language="1033" Version="0.0.0.1" Manufacturer="AMGL"
+			Id="1D19376E-682A-4B7C-845B-423A087E2B71"  
+			UpgradeCode="BEBD998D-9F2F-4B3B-A232-301449495104">
+			
+		<Package Id="*" InstallerVersion="200" Compressed="yes" InstallScope="perMachine"
+				Description="AMGL Launcher" Manufacturer="AMGL" />
+		
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		
+		<MediaTemplate EmbedCab="yes" />
+		
+		<Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Start the AMGL Launcher" />
+		<Property Id="WixShellExecTarget" Value="[#AmglExeFile]" />
+		
+		<CustomAction Id="LaunchApplication" BinaryKey="WixCA" DllEntry="WixShellExec" Impersonate="yes" />
+		
+		<Feature Id="AmglFeature" Level="1">
+			<ComponentRef Id="AmglExeComp"/>
+		</Feature>
+		
+		<UIRef Id="AmglUI"/>
+			
+	</Product>
+	
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="WindowsVolume">
+				<Directory Id="INSTALLFOLDER" Name="amgl" />
+			</Directory>
+			<Directory Id="ProgramMenuFolder" />
+			<Directory Id="DesktopFolder" />
+		</Directory>
+	</Fragment>
+	
+	<Fragment>
+		<DirectoryRef Id="INSTALLFOLDER">
+			<Component Id="AmglExeComp" Guid="04DA4E8B-94DE-4A59-BEDA-34C2CD99F5E0">
+				<File Id="AmglExeFile" Name="amgl.exe" Source="../bin/amgl.exe" KeyPath="yes">
+					<Shortcut Id="StartMenuLink" Name="AMGL" Directory="ProgramMenuFolder" Advertise="yes" />
+					<Shortcut Id="DesktopLink" Name="AMGL" Directory="DesktopFolder" Advertise="yes" />
+				</File>
+			</Component>
+		</DirectoryRef>
+	</Fragment>
+	
+	<Fragment>
+		<UI Id="AmglUI">
+			<TextStyle Id="WixUI_Font_Normal" FaceName="Tahoma" Size="8" />
+			<TextStyle Id="WixUI_Font_Bigger" FaceName="Tahoma" Size="12" />
+			<TextStyle Id="WixUI_Font_Title" FaceName="Tahoma" Size="9" Bold="yes" />
+			
+			<Property Id="DefaultUIFont" Value="WixUI_Font_Normal" />
+			<Property Id="WixUI_Mode" Value="Minimal" />
+			
+			<DialogRef Id="ErrorDlg" />
+			<DialogRef Id="FatalError" />
+			<DialogRef Id="FilesInUse" />
+			<DialogRef Id="UserExit" />
+			
+			<Publish Dialog="ExitDialog" Control="Finish" Event="EndDialog" Value="Return" Order="999">1</Publish>
+			<Publish Dialog="ExitDialog" Control="Finish" Event="DoAction" Value="LaunchApplication">WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 and NOT Installed</Publish>
+			
+			<Publish Dialog="WelcomeDlg" Control="Next" Event="NewDialog" Value="VerifyReadyDlg">NOT Installed</Publish>
+			
+			<Publish Dialog="VerifyReadyDlg" Control="Back" Event="NewDialog" Value="WelcomeDlg" Order="1">NOT Installed</Publish>
+			<Publish Dialog="VerifyReadyDlg" Control="Back" Event="NewDialog" Value="MaintenanceTypeDlg" Order="2">Installed</Publish>
+			
+			<Publish Dialog="MaintenanceWelcomeDlg" Control="Next" Event="NewDialog" Value="MaintenanceTypeDlg">1</Publish>
+			
+			<Publish Dialog="MaintenanceTypeDlg" Control="RepairButton" Event="NewDialog" Value="VerifyReadyDlg">1</Publish>
+			<Publish Dialog="MaintenanceTypeDlg" Control="RemoveButton" Event="NewDialog" Value="VerifyReadyDlg">1</Publish>
+			<Publish Dialog="MaintenanceTypeDlg" Control="Back" Event="NewDialog" Value="MaintenanceWelcomeDlg">1</Publish>
+			
+			<Property Id="ARPNOMODIFY" Value="1" />
+		</UI>
+		<UIRef Id="WixUI_Common" />
+	</Fragment>
+	
+</Wix>
