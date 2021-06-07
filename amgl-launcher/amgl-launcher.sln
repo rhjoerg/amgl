@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "amgl-launcher-common", "amg
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "amgl-launcher-main", "amgl-launcher-main\amgl-launcher-main.csproj", "{EAE1697F-14EA-4BFD-90B6-DA3AC0421149}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "amgl-launcher-content", "amgl-launcher-content\amgl-launcher-content.csproj", "{029F5952-C094-469B-B58A-EA01CFA7FBCE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{EAE1697F-14EA-4BFD-90B6-DA3AC0421149}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EAE1697F-14EA-4BFD-90B6-DA3AC0421149}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EAE1697F-14EA-4BFD-90B6-DA3AC0421149}.Release|Any CPU.Build.0 = Release|Any CPU
+		{029F5952-C094-469B-B58A-EA01CFA7FBCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{029F5952-C094-469B-B58A-EA01CFA7FBCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{029F5952-C094-469B-B58A-EA01CFA7FBCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{029F5952-C094-469B-B58A-EA01CFA7FBCE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

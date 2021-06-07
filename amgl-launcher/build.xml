@@ -6,6 +6,7 @@
 
     <target name="build">
     	<antcall target="build-common" />
+    	<antcall target="build-content" />
     	<antcall target="build-main" />
     	<antcall target="merge" />
     	<antcall target="build-msi" />
@@ -19,6 +20,14 @@
     	</exec>
 	</target>
 	
+	<target name="build-content">
+    	<exec executable="msbuild" dir="amgl-launcher-content" failonerror="true">
+    		<arg line="-nologo"/>
+    		<arg line="-v:m"/>
+    		<arg line="-p:Configuration=Release"/>
+    	</exec>
+	</target>
+
 	<target name="build-main">
     	<exec executable="msbuild" dir="amgl-launcher-main" failonerror="true">
     		<arg line="-nologo"/>
@@ -73,6 +82,8 @@
 		
 		<delete dir="amgl-launcher-common/bin/Release" />
 		<delete dir="amgl-launcher-common/obj/Release" />
+		<delete dir="amgl-launcher-content/bin/Release" />
+		<delete dir="amgl-launcher-content/obj/Release" />
 		<delete dir="amgl-launcher-main/bin/Release" />
 		<delete dir="amgl-launcher-main/obj/Release" />
 		<delete dir="amgl-launcher-msi/obj" />
