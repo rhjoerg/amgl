@@ -26,6 +26,7 @@
     		<arg line="-v:m"/>
     		<arg line="-p:Configuration=Release"/>
     	</exec>
+		<exec executable="${basedir}/amgl-launcher-content/bin/Release/amgl-launcher-content.exe" />
 	</target>
 
 	<target name="build-main">
