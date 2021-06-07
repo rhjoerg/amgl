@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("AMGL Launcher")]
+[assembly: AssemblyTitle("amgl-launcher-main")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("AMGL")]
-[assembly: AssemblyProduct("AMGL")]
+[assembly: AssemblyProduct("amgl-launcher-main")]
 [assembly: AssemblyCopyright("Copyright ©  2021 AMGL")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("4570051e-8ba4-4d11-af9e-aef5845a6cb0")]
+[assembly: Guid("eae1697f-14ea-4bfd-90b6-da3ac0421149")]
 
 // Version information for an assembly consists of the following four values:
 //

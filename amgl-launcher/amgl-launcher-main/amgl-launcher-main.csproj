@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4570051E-8BA4-4D11-AF9E-AEF5845A6CB0}</ProjectGuid>
+    <ProjectGuid>{EAE1697F-14EA-4BFD-90B6-DA3AC0421149}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>amgl</RootNamespace>
-    <AssemblyName>amgl</AssemblyName>
+    <RootNamespace>amgl_launcher_main</RootNamespace>
+    <AssemblyName>amgl-launcher-main</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -56,7 +56,6 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

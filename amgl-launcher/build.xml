@@ -5,13 +5,13 @@
 	<available property="wix.exists" file="tools/candle.exe" />
 
     <target name="build">
-    	<antcall target="build-dll" />
-    	<antcall target="build-exe" />
+    	<antcall target="build-common" />
+    	<antcall target="build-main" />
     	<antcall target="merge" />
     	<antcall target="build-msi" />
     </target>
 	
-	<target name="build-dll">
+	<target name="build-common">
     	<exec executable="msbuild" dir="amgl-launcher-common" failonerror="true">
     		<arg line="-nologo"/>
     		<arg line="-v:m"/>
@@ -19,8 +19,8 @@
     	</exec>
 	</target>
 	
-	<target name="build-exe">
-    	<exec executable="msbuild" dir="amgl-launcher-exe" failonerror="true">
+	<target name="build-main">
+    	<exec executable="msbuild" dir="amgl-launcher-main" failonerror="true">
     		<arg line="-nologo"/>
     		<arg line="-v:m"/>
     		<arg line="-p:Configuration=Release"/>
@@ -31,8 +31,8 @@
 		<exec executable="${basedir}/tools/ILRepack.exe">
 			<arg line="/ndebug"/>
 			<arg line="/out:bin/amgl.exe" />
-			<arg line="amgl-launcher-exe/bin/Release/amgl.exe" />
-			<arg line="amgl-launcher-common/bin/Release/amgl.dll" />
+			<arg line="amgl-launcher-main/bin/Release/amgl-launcher-main.exe" />
+			<arg line="amgl-launcher-common/bin/Release/amgl-launcher-common.dll" />
 		</exec>
 		<delete file="bin/amgl.exe.config" />
 	</target>
@@ -73,8 +73,8 @@
 		
 		<delete dir="amgl-launcher-common/bin/Release" />
 		<delete dir="amgl-launcher-common/obj/Release" />
-		<delete dir="amgl-launcher-exe/bin/Release" />
-		<delete dir="amgl-launcher-exe/obj/Release" />
+		<delete dir="amgl-launcher-main/bin/Release" />
+		<delete dir="amgl-launcher-main/obj/Release" />
 		<delete dir="amgl-launcher-msi/obj" />
 		<delete dir="bin" />
 		
