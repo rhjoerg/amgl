@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>amgl_launcher_common</RootNamespace>
+    <Version>0.0.0.1</Version>
+    <Authors>AMGL</Authors>
+    <Company>AMGL</Company>
+    <Product>AMGL</Product>
+  </PropertyGroup>
+
+</Project>
