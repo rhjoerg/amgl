@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="amgl-tools-ilrepack" default="build">
+	
+    <target name="build">
+    	
+    	<mkdir dir="bin" />
+    	<mkdir dir="downloads" />
+    	<mkdir dir="temp" />
+    	
+    	<get usetimestamp="true" src="https://globalcdn.nuget.org/packages/ilrepack.2.0.18.nupkg" dest="downloads/ilrepack.zip" />
+    	<unzip src="downloads/ilrepack.zip" dest="temp" />
+    	<copy file="temp/tools/ILRepack.exe" todir="bin" />
+    	
+    	<delete dir="temp" />
+    	
+    </target>
+
+    <target name="clean">
+    </target>
+	
+</project>
