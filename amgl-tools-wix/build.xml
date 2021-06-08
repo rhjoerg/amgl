@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="amgl-tools-ilrepack" default="build">
+<project name="amgl-tools-wix" default="build">
 	
     <target name="build">
     	
@@ -7,9 +7,11 @@
     	<mkdir dir="downloads" />
     	<mkdir dir="temp" />
     	
-    	<get usetimestamp="true" src="https://globalcdn.nuget.org/packages/ilrepack.2.0.18.nupkg" dest="downloads/ilrepack.zip" />
-    	<unzip src="downloads/ilrepack.zip" dest="temp" />
-    	<copy file="temp/tools/ILRepack.exe" todir="bin" />
+    	<get usetimestamp="true" src="https://globalcdn.nuget.org/packages/wix.3.11.2.nupkg" dest="downloads/wix.zip" />
+    	<unzip src="downloads/wix.zip" dest="temp" />
+    	<copy todir="bin">
+    		<fileset dir="temp/tools" />
+    	</copy>
     	
     	<delete dir="temp" />
     	
