@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="amgl-launcher-common" default="build">
+	
+	<target name="build">
+		
+		<exec executable="MSBuild" dir="${basedir}">
+			<arg line="-p:Configuration=Release"/>
+		</exec>
+		
+	</target>
+	
+	<target name="clean">
+		<delete dir="bin" />
+		<delete dir="obj" />
+	</target>
+	
+</project>
