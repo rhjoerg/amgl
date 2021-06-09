@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31402.337
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "amgl-launcher-main", "amgl-launcher-main.csproj", "{EDC67783-539B-4FC2-979A-AAC79F5641DA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EDC67783-539B-4FC2-979A-AAC79F5641DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDC67783-539B-4FC2-979A-AAC79F5641DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDC67783-539B-4FC2-979A-AAC79F5641DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDC67783-539B-4FC2-979A-AAC79F5641DA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C35246AF-7CAC-4398-BF24-46FBF238D147}
+	EndGlobalSection
+EndGlobal
